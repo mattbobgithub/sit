@@ -1,0 +1,35 @@
+
+<div>
+    <h2><span>Ticket Action</span> {{vm.ticketAction.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span>Action Type</span></dt>
+        <dd>
+            <span>{{vm.ticketAction.actionType}}</span>
+        </dd>
+        <dt><span>Action Date</span></dt>
+        <dd>
+            <span>{{vm.ticketAction.actionDate | date:'medium'}}</span>
+        </dd>
+        <dt><span>Action By</span></dt>
+        <dd>
+            <span>{{vm.ticketAction.actionBy}}</span>
+        </dd>
+        <dt><span>Ticket</span></dt>
+        <dd>
+            <a ui-sref="ticketANG_SIT-detail({id:vm.ticketAction.ticketId})">{{vm.ticketAction.ticketId}}</a>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button" ui-sref="ticket-actionANG_SIT-detail.edit({id:vm.ticketAction.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-xs hidden-sm"> Edit</span>
+    </button>
+</div>

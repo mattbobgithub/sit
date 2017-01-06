@@ -1,0 +1,61 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()">
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myTicketActionLabel">Create or edit a Ticket Action</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" ng-show="vm.ticketAction.id">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.ticketAction.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_actionType">Action Type</label>
+            <select class="form-control" name="actionType" ng-model="vm.ticketAction.actionType" id="field_actionType">
+                <option value="NEW">NEW</option>
+                <option value="TRANSFER_REQUEST" data-translate="sitApp.ActionType.TRANSFER_REQUEST">TRANSFER_REQUEST</option>
+                <option value="TRANSFER_OUT" data-translate="sitApp.ActionType.TRANSFER_OUT">TRANSFER_OUT</option>
+                <option value="RECEIVED">RECEIVED</option>
+                <option value="IN_PROCESS" data-translate="sitApp.ActionType.IN_PROCESS">IN_PROCESS</option>
+                <option value="TRANSFER_RETURN" data-translate="sitApp.ActionType.TRANSFER_RETURN">TRANSFER_RETURN</option>
+                <option value="PICKED_UP" data-translate="sitApp.ActionType.PICKED_UP">PICKED_UP</option>
+                <option value="SHIPPED">SHIPPED</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_actionDate">Action Date</label>
+                <div class="input-group">
+                    <input id="field_actionDate" type="text" class="form-control" name="actionDate" datetime-picker="{{dateformat}}" ng-model="vm.ticketAction.actionDate" is-open="vm.datePickerOpenStatus.actionDate"
+                      />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('actionDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_actionBy">Action By</label>
+            <input type="text" class="form-control" name="actionBy" id="field_actionBy"
+                    ng-model="vm.ticketAction.actionBy"
+                     />
+        </div>
+
+        <div class="form-group">
+            <label for="field_ticket">Ticket</label>
+            <select class="form-control" id="field_ticket" name="ticket" ng-model="vm.ticketAction.ticketId" ng-options="ticket.id as ticket.id for ticket in vm.tickets"            >
+                <option value=""></option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

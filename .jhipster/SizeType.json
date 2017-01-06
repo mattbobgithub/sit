@@ -1,0 +1,32 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "garment",
+            "otherEntityName": "garment",
+            "otherEntityRelationshipName": "sizeType"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "garmentSize",
+            "otherEntityName": "garmentSize",
+            "otherEntityRelationshipName": "sizeType"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "description",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "changelogDate": "20170102162230",
+    "entityTableName": "size_type",
+    "dto": "mapstruct",
+    "pagination": "no",
+    "service": "serviceClass",
+    "angularJSSuffix": "ANG_SIT"
+}

@@ -1,0 +1,257 @@
+entity Company {
+	description String required
+    companyDbname String 
+}
+
+entity Customer{
+	customerCode String required  
+}
+
+entity Garment{
+	description String required
+    gender Gender
+    
+}
+
+entity GarmentSize{
+	description String required
+}
+
+entity Store{
+	description String required
+    phone String
+    defaultPromiseDays Integer
+    defaultPriceCategoryId Long
+}
+
+
+entity PriceCategory{
+	description String required
+    percentageDiscount Double 
+    amountDiscount Double
+}
+
+entity WorkroomMetric{
+	defaultFittingTimeMins Integer
+    efficiencyPercentage Double
+    utilizationPercentage Double
+}
+
+entity Workroom{
+	description String required
+    phone String
+    centralWorkroomIndicator Boolean
+}
+entity Sku{
+	description String required
+    skuCode String required
+}
+
+entity SizeType{
+	description String required
+}
+
+entity AlterationGroup {
+	description String required
+    gender Gender
+}
+
+entity Alteration {
+	description String required
+}
+
+entity Color {
+	description String required
+    orderNumber Integer
+}
+
+entity AlterationSubGroup{
+	description String required,
+    gender Gender
+}
+
+
+
+entity AlterationDisplayType{
+	description String required
+    measurementType MeasurementType
+    displayprice Boolean
+	displaytime Boolean 
+	displayquantity Boolean 
+	displaymeasurement1 Boolean 
+	displaymeasurement2 Boolean 
+	enableprice Boolean 
+	enabletime Boolean 
+	enablequantity Boolean 
+	enablemeasurement1 Boolean 
+	enablemeasurement2 Boolean 
+	defaultPrice Double
+	defaultTime Integer
+	defaultQuantity Integer
+	defaultMeasurement1 Double
+	defaultMeasurement2 Double
+	maxMeasurement1 Double
+	maxMeasurement2 Double
+	minMeasurement1 Double
+	minMeasurement2 Double
+}
+
+entity Alteration{
+	gender Gender,
+	activeStatus Boolean
+	shortDescription String required
+    longDescription String
+    estimatedTime Integer
+    measurement1 Double
+    measurement2 Double
+    quantity Integer
+    shortListInd Boolean
+    autoDefaultInd Boolean
+    groupOrderNum Integer    
+}
+
+entity AlterationPrice{
+	price Double
+}
+
+entity Ticket{
+	dropDate ZonedDateTime
+    promiseDate ZonedDateTime
+    workroomDeadline ZonedDateTime
+    recieptId String
+    priceCharged Double
+    purchaseType PurchaseType
+    priority TicketPriority
+    completedBy String
+    completedDate ZonedDateTime
+    waiveCostIndicator Boolean
+    waiveCostReason WaiveCostReason
+	
+}
+
+
+
+entity TicketAlteration{
+	lineNumber Integer
+    gender Gender
+    altId Long
+    description String
+    tagType String
+    estimateTime Integer
+    price Double
+    measurement1 Double
+    measurement2 Double
+    quantity Integer
+    completeIndicator Boolean
+ 
+}
+
+entity TicketAction{
+	actionType ActionType
+    actionDate ZonedDateTime
+    actionBy String
+}
+
+entity Transfer{
+	fromWorkroomId Long
+    toWorkroomId Long
+	status TransferStatus
+}
+
+entity SitUser{
+	username String
+    email String
+    userType UserType
+    fitterIndicator Boolean
+    managerApprovalCode Integer
+    
+    
+}
+
+enum WaiveCostReason{
+	SALES_PREFERENCE, LOYALTY, SALE
+}
+
+enum PurchaseType{
+	NEW, RETURN, CUSTOMER_OWNED
+}
+enum ActionType{
+	NEW, TRANSFER_REQUEST, TRANSFER_OUT, RECEIVED, IN_PROCESS, TRANSFER_RETURN, PICKED_UP, SHIPPED
+}
+
+enum TransferStatus{
+	OUT, ENROUTE, RECEIVED, RETURN
+}
+
+enum TicketPriority{
+	NORMAL, HIGH, HIGH_OVERNIGHT
+}
+enum CommunicationPreference{
+	NONE, EMAIL, TEXT, PHONE
+}
+
+enum Gender {
+    MENS, WOMENS, BOYS, GIRLS
+}
+
+enum State {
+    ALABAMA, ALASKA, AMERICAN_SAMOA, ARIZONA, ARKANSAS, 
+    CALIFORNIA, COLORADO, CONNECTICUT, DELAWARE
+}
+
+enum MeasurementType {
+NONE, PANTS, HEM
+}
+
+enum UserType{
+ADMIN, MANAGER, SALES, TAILOR, SHIPPING
+}
+
+
+
+
+// defining multiple OneToMany relationships with comments
+relationship OneToMany {
+	AlterationGroup{alterationSubGroup} to AlterationSubGroup,
+    AlterationSubGroup{alteration} to Alteration,
+    SizeType{garment} to Garment,
+    SizeType{garmentSize} to GarmentSize,
+    Company{sitUser} to SitUser,
+    Store{storeUser} to SitUser,
+    Workroom{workroomUser} to SitUser,
+    Alteration{alterationPrice} to AlterationPrice,
+    PriceCategory{alterationPrice} to AlterationPrice,
+    Ticket{ticketAlteration} to TicketAlteration,
+    Ticket{ticketAction} to TicketAction,
+    Transfer{ticket} to Ticket
+    
+    
+}
+
+relationship ManyToMany{
+	Alteration{alterationDisplayType} to AlterationDisplayType{alteration},
+    AlterationGroup{garment} to Garment{alterationGroup}
+}
+
+relationship ManyToOne{
+	Sku{garmentSize} to GarmentSize,
+    Sku{garment} to Garment,
+    Sku{sizeType} to SizeType,
+    Sku{color} to Color, 
+    Store{workroom} to Workroom, 
+    Ticket{customer} to Customer,
+    Ticket{store} to Store,
+    Ticket{workroom} to Workroom
+}
+
+relationship OneToOne{
+	SitUser{user} to User,
+    Workroom{WorkroomMetric} to WorkroomMetric
+}
+
+
+
+dto * with mapstruct
+service all with serviceClass
+// Set an angular suffix
+angularSuffix * with ANG_SIT

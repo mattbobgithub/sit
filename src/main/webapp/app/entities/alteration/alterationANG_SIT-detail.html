@@ -1,0 +1,73 @@
+
+<div>
+    <h2><span>Alteration</span> {{vm.alteration.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span>Gender</span></dt>
+        <dd>
+            <span>{{vm.alteration.gender}}</span>
+        </dd>
+        <dt><span>Active Status</span></dt>
+        <dd>
+            <span>{{vm.alteration.activeStatus}}</span>
+        </dd>
+        <dt><span>Short Description</span></dt>
+        <dd>
+            <span>{{vm.alteration.shortDescription}}</span>
+        </dd>
+        <dt><span>Long Description</span></dt>
+        <dd>
+            <span>{{vm.alteration.longDescription}}</span>
+        </dd>
+        <dt><span>Estimated Time</span></dt>
+        <dd>
+            <span>{{vm.alteration.estimatedTime}}</span>
+        </dd>
+        <dt><span>Measurement 1</span></dt>
+        <dd>
+            <span>{{vm.alteration.measurement1}}</span>
+        </dd>
+        <dt><span>Measurement 2</span></dt>
+        <dd>
+            <span>{{vm.alteration.measurement2}}</span>
+        </dd>
+        <dt><span>Quantity</span></dt>
+        <dd>
+            <span>{{vm.alteration.quantity}}</span>
+        </dd>
+        <dt><span>Short List Ind</span></dt>
+        <dd>
+            <span>{{vm.alteration.shortListInd}}</span>
+        </dd>
+        <dt><span>Auto Default Ind</span></dt>
+        <dd>
+            <span>{{vm.alteration.autoDefaultInd}}</span>
+        </dd>
+        <dt><span>Group Order Num</span></dt>
+        <dd>
+            <span>{{vm.alteration.groupOrderNum}}</span>
+        </dd>
+        <dt><span>Alteration Display Type</span></dt>
+        <dd>
+            <span ng-repeat="alterationDisplayType in vm.alteration.alterationDisplayTypes">
+                <a ui-sref="alteration-display-typeANG_SIT-detail({id: alterationDisplayType.id})">{{alterationDisplayType.id}}</a>{{$last ? '' : ', '}}
+            </span>
+        </dd>
+        <dt><span>Alteration Sub Group</span></dt>
+        <dd>
+            <a ui-sref="alteration-sub-groupANG_SIT-detail({id:vm.alteration.alterationSubGroupId})">{{vm.alteration.alterationSubGroupId}}</a>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button" ui-sref="alterationANG_SIT-detail.edit({id:vm.alteration.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-xs hidden-sm"> Edit</span>
+    </button>
+</div>

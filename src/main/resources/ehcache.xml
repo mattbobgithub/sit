@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns='http://www.ehcache.org/v3'
+         xsi:schemaLocation="http://www.ehcache.org/v3 http://www.ehcache.org/schema/ehcache-core-3.0.xsd">
+
+    <cache-template name="simple">
+        <expiry>
+            <ttl unit="seconds">3600</ttl>
+        </expiry>
+        <heap>100</heap>
+    </cache-template>
+
+    <cache alias="com.sit.domain.User" uses-template="simple"/>
+
+    <cache alias="com.sit.domain.Authority" uses-template="simple"/>
+
+    <cache alias="com.sit.domain.User.authorities" uses-template="simple"/>
+
+    <cache alias="com.sit.domain.PersistentToken" uses-template="simple"/>
+
+    <cache alias="com.sit.domain.User.persistentTokens" uses-template="simple"/>
+
+    <cache alias="com.sit.domain.Company" uses-template="simple"/>
+
+    <cache alias="com.sit.domain.Company.sitUsers" uses-template="simple"/>
+
+    <cache alias="com.sit.domain.Customer" uses-template="simple"/>
+
+    <cache alias="com.sit.domain.Garment" uses-template="simple"/>
+
+    <cache alias="com.sit.domain.Garment.alterationGroups" uses-template="simple"/>
+
+    <cache alias="com.sit.domain.GarmentSize" uses-template="simple"/>
+
+    <cache alias="com.sit.domain.Store" uses-template="simple"/>
+
+    <cache alias="com.sit.domain.Store.storeUsers" uses-template="simple"/>
+
+    <cache alias="com.sit.domain.PriceCategory" uses-template="simple"/>
+
+    <cache alias="com.sit.domain.PriceCategory.alterationPrices" uses-template="simple"/>
+
+    <cache alias="com.sit.domain.WorkroomMetric" uses-template="simple"/>
+
+    <cache alias="com.sit.domain.Workroom" uses-template="simple"/>
+
+    <cache alias="com.sit.domain.Workroom.workroomUsers" uses-template="simple"/>
+
+    <cache alias="com.sit.domain.Sku" uses-template="simple"/>
+
+    <cache alias="com.sit.domain.SizeType" uses-template="simple"/>
+
+    <cache alias="com.sit.domain.SizeType.garments" uses-template="simple"/>
+
+    <cache alias="com.sit.domain.SizeType.garmentSizes" uses-template="simple"/>
+
+    <cache alias="com.sit.domain.AlterationGroup" uses-template="simple"/>
+
+    <cache alias="com.sit.domain.AlterationGroup.alterationSubGroups" uses-template="simple"/>
+
+    <cache alias="com.sit.domain.AlterationGroup.garments" uses-template="simple"/>
+
+    <cache alias="com.sit.domain.Alteration" uses-template="simple"/>
+
+    <cache alias="com.sit.domain.Alteration.alterationPrices" uses-template="simple"/>
+
+    <cache alias="com.sit.domain.Alteration.alterationDisplayTypes" uses-template="simple"/>
+
+    <cache alias="com.sit.domain.Color" uses-template="simple"/>
+
+    <cache alias="com.sit.domain.AlterationSubGroup" uses-template="simple"/>
+
+    <cache alias="com.sit.domain.AlterationSubGroup.alterations" uses-template="simple"/>
+
+    <cache alias="com.sit.domain.AlterationDisplayType" uses-template="simple"/>
+
+    <cache alias="com.sit.domain.AlterationDisplayType.alterations" uses-template="simple"/>
+
+    <cache alias="com.sit.domain.AlterationPrice" uses-template="simple"/>
+
+    <cache alias="com.sit.domain.Ticket" uses-template="simple"/>
+
+    <cache alias="com.sit.domain.Ticket.ticketAlterations" uses-template="simple"/>
+
+    <cache alias="com.sit.domain.Ticket.ticketActions" uses-template="simple"/>
+
+    <cache alias="com.sit.domain.TicketAlteration" uses-template="simple"/>
+
+    <cache alias="com.sit.domain.TicketAction" uses-template="simple"/>
+
+    <cache alias="com.sit.domain.Transfer" uses-template="simple"/>
+
+    <cache alias="com.sit.domain.Transfer.tickets" uses-template="simple"/>
+
+    <cache alias="com.sit.domain.SitUser" uses-template="simple"/>
+
+    <!-- jhipster-needle-ehcache-add-entry -->
+</config>

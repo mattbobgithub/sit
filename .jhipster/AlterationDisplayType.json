@@ -1,0 +1,108 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "many-to-many",
+            "relationshipName": "alteration",
+            "otherEntityName": "alteration",
+            "ownerSide": false,
+            "otherEntityRelationshipName": "alterationDisplayType"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "description",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "measurementType",
+            "fieldType": "MeasurementType",
+            "fieldValues": "NONE,PANTS,HEM"
+        },
+        {
+            "fieldName": "displayprice",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "displaytime",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "displayquantity",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "displaymeasurement1",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "displaymeasurement2",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "enableprice",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "enabletime",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "enablequantity",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "enablemeasurement1",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "enablemeasurement2",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "defaultPrice",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "defaultTime",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "defaultQuantity",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "defaultMeasurement1",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "defaultMeasurement2",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "maxMeasurement1",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "maxMeasurement2",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "minMeasurement1",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "minMeasurement2",
+            "fieldType": "Double"
+        }
+    ],
+    "changelogDate": "20170102162235",
+    "entityTableName": "alteration_display_type",
+    "dto": "mapstruct",
+    "pagination": "no",
+    "service": "serviceClass",
+    "angularJSSuffix": "ANG_SIT"
+}

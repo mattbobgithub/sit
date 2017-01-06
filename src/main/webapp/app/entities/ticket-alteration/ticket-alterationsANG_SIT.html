@@ -1,0 +1,80 @@
+<div>
+    <h2>Ticket Alterations</h2>
+    <jhi-alert></jhi-alert>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="ticket-alterationANG_SIT.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span >
+                        Create new Ticket Alteration
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr>
+                    <th><span>ID</span></th>
+                    <th><span>Line Number</span></th>
+                    <th><span>Gender</span></th>
+                    <th><span>Alt Id</span></th>
+                    <th><span>Description</span></th>
+                    <th><span>Tag Type</span></th>
+                    <th><span>Estimate Time</span></th>
+                    <th><span>Price</span></th>
+                    <th><span>Measurement 1</span></th>
+                    <th><span>Measurement 2</span></th>
+                    <th><span>Quantity</span></th>
+                    <th><span>Complete Indicator</span></th>
+                    <th><span>Ticket</span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="ticketAlteration in vm.ticketAlterations track by ticketAlteration.id">
+                    <td><a ui-sref="ticket-alterationANG_SIT-detail({id:ticketAlteration.id})">{{ticketAlteration.id}}</a></td>
+                    <td>{{ticketAlteration.lineNumber}}</td>
+                    <td>{{ticketAlteration.gender}}</td>
+                    <td>{{ticketAlteration.altId}}</td>
+                    <td>{{ticketAlteration.description}}</td>
+                    <td>{{ticketAlteration.tagType}}</td>
+                    <td>{{ticketAlteration.estimateTime}}</td>
+                    <td>{{ticketAlteration.price}}</td>
+                    <td>{{ticketAlteration.measurement1}}</td>
+                    <td>{{ticketAlteration.measurement2}}</td>
+                    <td>{{ticketAlteration.quantity}}</td>
+                    <td>{{ticketAlteration.completeIndicator}}</td>
+                    <td>
+                        <a ui-sref="ticketANG_SIT-detail({id:ticketAlteration.ticketId})">{{ticketAlteration.ticketId}}</a>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="ticket-alterationANG_SIT-detail({id:ticketAlteration.id})"
+                                    class="btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-xs hidden-sm"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="ticket-alterationANG_SIT.edit({id:ticketAlteration.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-xs hidden-sm"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="ticket-alterationANG_SIT.delete({id:ticketAlteration.id})"
+                                    class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-xs hidden-sm"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

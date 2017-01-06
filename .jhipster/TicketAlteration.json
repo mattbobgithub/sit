@@ -1,0 +1,64 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "ticket",
+            "otherEntityName": "ticket",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "lineNumber",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "gender",
+            "fieldType": "Gender",
+            "fieldValues": "MENS,WOMENS,BOYS,GIRLS"
+        },
+        {
+            "fieldName": "altId",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "description",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "tagType",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "estimateTime",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "price",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "measurement1",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "measurement2",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "quantity",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "completeIndicator",
+            "fieldType": "Boolean"
+        }
+    ],
+    "changelogDate": "20170102162238",
+    "entityTableName": "ticket_alteration",
+    "dto": "mapstruct",
+    "pagination": "no",
+    "service": "serviceClass",
+    "angularJSSuffix": "ANG_SIT"
+}

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+    <!--
+        Added the constraints for entity Alteration.
+    -->
+    <changeSet id="20170102162232-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="alterations_id"
+                                 baseTableName="alteration_alteration_display_type"
+                                 constraintName="fk_alteration_alteration_display_type_alterations_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="alteration"/>
+        <addForeignKeyConstraint baseColumnNames="alteration_display_types_id"
+                                 baseTableName="alteration_alteration_display_type"
+                                 constraintName="alteration_alteration_display_t_alteration_display_types_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="alteration_display_type"/>
+        
+        <addForeignKeyConstraint baseColumnNames="alteration_sub_group_id"
+                                 baseTableName="alteration"
+                                 constraintName="fk_alteration_alteration_sub_group_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="alteration_sub_group"/>
+
+    </changeSet>
+</databaseChangeLog>

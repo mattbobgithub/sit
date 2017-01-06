@@ -1,0 +1,44 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()">
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myWorkroomMetricLabel">Create or edit a Workroom Metric</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" ng-show="vm.workroomMetric.id">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.workroomMetric.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_defaultFittingTimeMins">Default Fitting Time Mins</label>
+            <input type="number" class="form-control" name="defaultFittingTimeMins" id="field_defaultFittingTimeMins"
+                    ng-model="vm.workroomMetric.defaultFittingTimeMins"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_efficiencyPercentage">Efficiency Percentage</label>
+            <input type="number" class="form-control" name="efficiencyPercentage" id="field_efficiencyPercentage"
+                    ng-model="vm.workroomMetric.efficiencyPercentage"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_utilizationPercentage">Utilization Percentage</label>
+            <input type="number" class="form-control" name="utilizationPercentage" id="field_utilizationPercentage"
+                    ng-model="vm.workroomMetric.utilizationPercentage"
+                     />
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

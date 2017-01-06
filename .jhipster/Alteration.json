@@ -1,0 +1,81 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "alterationPrice",
+            "otherEntityName": "alterationPrice",
+            "otherEntityRelationshipName": "alteration"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityRelationshipName": "alteration",
+            "relationshipName": "alterationDisplayType",
+            "otherEntityName": "alterationDisplayType",
+            "otherEntityField": "id",
+            "ownerSide": true
+        },
+        {
+            "relationshipName": "alterationSubGroup",
+            "otherEntityName": "alterationSubGroup",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "gender",
+            "fieldType": "Gender",
+            "fieldValues": "MENS,WOMENS,BOYS,GIRLS"
+        },
+        {
+            "fieldName": "activeStatus",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "shortDescription",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "longDescription",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "estimatedTime",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "measurement1",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "measurement2",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "quantity",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "shortListInd",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "autoDefaultInd",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "groupOrderNum",
+            "fieldType": "Integer"
+        }
+    ],
+    "changelogDate": "20170102162232",
+    "entityTableName": "alteration",
+    "dto": "mapstruct",
+    "pagination": "no",
+    "service": "serviceClass",
+    "angularJSSuffix": "ANG_SIT"
+}

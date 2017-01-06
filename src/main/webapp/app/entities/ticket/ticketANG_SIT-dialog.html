@@ -1,0 +1,138 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()">
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myTicketLabel">Create or edit a Ticket</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" ng-show="vm.ticket.id">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.ticket.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_dropDate">Drop Date</label>
+                <div class="input-group">
+                    <input id="field_dropDate" type="text" class="form-control" name="dropDate" datetime-picker="{{dateformat}}" ng-model="vm.ticket.dropDate" is-open="vm.datePickerOpenStatus.dropDate"
+                      />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('dropDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_promiseDate">Promise Date</label>
+                <div class="input-group">
+                    <input id="field_promiseDate" type="text" class="form-control" name="promiseDate" datetime-picker="{{dateformat}}" ng-model="vm.ticket.promiseDate" is-open="vm.datePickerOpenStatus.promiseDate"
+                      />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('promiseDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_workroomDeadline">Workroom Deadline</label>
+                <div class="input-group">
+                    <input id="field_workroomDeadline" type="text" class="form-control" name="workroomDeadline" datetime-picker="{{dateformat}}" ng-model="vm.ticket.workroomDeadline" is-open="vm.datePickerOpenStatus.workroomDeadline"
+                      />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('workroomDeadline')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_recieptId">Reciept Id</label>
+            <input type="text" class="form-control" name="recieptId" id="field_recieptId"
+                    ng-model="vm.ticket.recieptId"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_priceCharged">Price Charged</label>
+            <input type="number" class="form-control" name="priceCharged" id="field_priceCharged"
+                    ng-model="vm.ticket.priceCharged"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_purchaseType">Purchase Type</label>
+            <select class="form-control" name="purchaseType" ng-model="vm.ticket.purchaseType" id="field_purchaseType">
+                <option value="NEW">NEW</option>
+                <option value="RETURN">RETURN</option>
+                <option value="CUSTOMER_OWNED" data-translate="sitApp.PurchaseType.CUSTOMER_OWNED">CUSTOMER_OWNED</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_priority">Priority</label>
+            <select class="form-control" name="priority" ng-model="vm.ticket.priority" id="field_priority">
+                <option value="NORMAL">NORMAL</option>
+                <option value="HIGH">HIGH</option>
+                <option value="HIGH_OVERNIGHT" data-translate="sitApp.TicketPriority.HIGH_OVERNIGHT">HIGH_OVERNIGHT</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_completedBy">Completed By</label>
+            <input type="text" class="form-control" name="completedBy" id="field_completedBy"
+                    ng-model="vm.ticket.completedBy"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_completedDate">Completed Date</label>
+                <div class="input-group">
+                    <input id="field_completedDate" type="text" class="form-control" name="completedDate" datetime-picker="{{dateformat}}" ng-model="vm.ticket.completedDate" is-open="vm.datePickerOpenStatus.completedDate"
+                      />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('completedDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_waiveCostIndicator">Waive Cost Indicator</label>
+            <input type="checkbox" class="form-control" name="waiveCostIndicator" id="field_waiveCostIndicator"
+                    ng-model="vm.ticket.waiveCostIndicator"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_waiveCostReason">Waive Cost Reason</label>
+            <select class="form-control" name="waiveCostReason" ng-model="vm.ticket.waiveCostReason" id="field_waiveCostReason">
+                <option value="SALES_PREFERENCE" data-translate="sitApp.WaiveCostReason.SALES_PREFERENCE">SALES_PREFERENCE</option>
+                <option value="LOYALTY">LOYALTY</option>
+                <option value="SALE">SALE</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="field_customer">Customer</label>
+            <select class="form-control" id="field_customer" name="customer" ng-model="vm.ticket.customerId" ng-options="customer.id as customer.id for customer in vm.customers"            >
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="field_store">Store</label>
+            <select class="form-control" id="field_store" name="store" ng-model="vm.ticket.storeId" ng-options="store.id as store.id for store in vm.stores"            >
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="field_workroom">Workroom</label>
+            <select class="form-control" id="field_workroom" name="workroom" ng-model="vm.ticket.workroomId" ng-options="workroom.id as workroom.id for workroom in vm.workrooms"            >
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="field_transfer">Transfer</label>
+            <select class="form-control" id="field_transfer" name="transfer" ng-model="vm.ticket.transferId" ng-options="transfer.id as transfer.id for transfer in vm.transfers"            >
+                <option value=""></option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

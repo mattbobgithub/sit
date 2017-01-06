@@ -1,0 +1,62 @@
+<div>
+    <h2>Garments</h2>
+    <jhi-alert></jhi-alert>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="garmentANG_SIT.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span >
+                        Create new Garment
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr>
+                    <th><span>ID</span></th>
+                    <th><span>Description</span></th>
+                    <th><span>Gender</span></th>
+                    <th><span>Size Type</span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="garment in vm.garments track by garment.id">
+                    <td><a ui-sref="garmentANG_SIT-detail({id:garment.id})">{{garment.id}}</a></td>
+                    <td>{{garment.description}}</td>
+                    <td>{{garment.gender}}</td>
+                    <td>
+                        <a ui-sref="size-typeANG_SIT-detail({id:garment.sizeTypeId})">{{garment.sizeTypeId}}</a>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="garmentANG_SIT-detail({id:garment.id})"
+                                    class="btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-xs hidden-sm"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="garmentANG_SIT.edit({id:garment.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-xs hidden-sm"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="garmentANG_SIT.delete({id:garment.id})"
+                                    class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-xs hidden-sm"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

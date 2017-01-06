@@ -1,0 +1,33 @@
+
+<div>
+    <h2><span>Alteration Group</span> {{vm.alterationGroup.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span>Description</span></dt>
+        <dd>
+            <span>{{vm.alterationGroup.description}}</span>
+        </dd>
+        <dt><span>Gender</span></dt>
+        <dd>
+            <span>{{vm.alterationGroup.gender}}</span>
+        </dd>
+        <dt><span>Garment</span></dt>
+        <dd>
+            <span ng-repeat="garment in vm.alterationGroup.garments">
+                <a ui-sref="garmentANG_SIT-detail({id: garment.id})">{{garment.id}}</a>{{$last ? '' : ', '}}
+            </span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button" ui-sref="alteration-groupANG_SIT-detail.edit({id:vm.alterationGroup.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-xs hidden-sm"> Edit</span>
+    </button>
+</div>

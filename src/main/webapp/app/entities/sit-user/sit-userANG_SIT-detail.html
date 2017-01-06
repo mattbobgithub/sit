@@ -1,0 +1,55 @@
+
+<div>
+    <h2><span>Sit User</span> {{vm.sitUser.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span>Username</span></dt>
+        <dd>
+            <span>{{vm.sitUser.username}}</span>
+        </dd>
+        <dt><span>Email</span></dt>
+        <dd>
+            <span>{{vm.sitUser.email}}</span>
+        </dd>
+        <dt><span>User Type</span></dt>
+        <dd>
+            <span>{{vm.sitUser.userType}}</span>
+        </dd>
+        <dt><span>Fitter Indicator</span></dt>
+        <dd>
+            <span>{{vm.sitUser.fitterIndicator}}</span>
+        </dd>
+        <dt><span>Manager Approval Code</span></dt>
+        <dd>
+            <span>{{vm.sitUser.managerApprovalCode}}</span>
+        </dd>
+        <dt><span>Company</span></dt>
+        <dd>
+            <a ui-sref="companyANG_SIT-detail({id:vm.sitUser.companyId})">{{vm.sitUser.companyId}}</a>
+        </dd>
+        <dt><span>Store</span></dt>
+        <dd>
+            <a ui-sref="storeANG_SIT-detail({id:vm.sitUser.storeId})">{{vm.sitUser.storeId}}</a>
+        </dd>
+        <dt><span>Workroom</span></dt>
+        <dd>
+            <a ui-sref="workroomANG_SIT-detail({id:vm.sitUser.workroomId})">{{vm.sitUser.workroomId}}</a>
+        </dd>
+        <dt><span>User</span></dt>
+        <dd>
+            {{vm.sitUser.userId}}
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button" ui-sref="sit-userANG_SIT-detail.edit({id:vm.sitUser.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-xs hidden-sm"> Edit</span>
+    </button>
+</div>

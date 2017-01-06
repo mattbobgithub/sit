@@ -1,0 +1,32 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "ticket",
+            "otherEntityName": "ticket",
+            "otherEntityRelationshipName": "transfer"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "fromWorkroomId",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "toWorkroomId",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "status",
+            "fieldType": "TransferStatus",
+            "fieldValues": "OUT,ENROUTE,RECEIVED,RETURN"
+        }
+    ],
+    "changelogDate": "20170102162240",
+    "entityTableName": "transfer",
+    "dto": "mapstruct",
+    "pagination": "no",
+    "service": "serviceClass",
+    "angularJSSuffix": "ANG_SIT"
+}

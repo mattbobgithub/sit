@@ -1,0 +1,44 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "storeUser",
+            "otherEntityName": "sitUser",
+            "otherEntityRelationshipName": "store"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "workroom",
+            "otherEntityName": "workroom",
+            "otherEntityField": "id"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "description",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "phone",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "defaultPromiseDays",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "defaultPriceCategoryId",
+            "fieldType": "Long"
+        }
+    ],
+    "changelogDate": "20170102162225",
+    "entityTableName": "store",
+    "dto": "mapstruct",
+    "pagination": "no",
+    "service": "serviceClass",
+    "angularJSSuffix": "ANG_SIT"
+}

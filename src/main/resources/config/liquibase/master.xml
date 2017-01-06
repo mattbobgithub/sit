@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <include file="classpath:config/liquibase/changelog/00000000000000_initial_schema.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20170102162221_added_entity_Company.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20170102162222_added_entity_Customer.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20170102162223_added_entity_Garment.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20170102162224_added_entity_GarmentSize.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20170102162225_added_entity_Store.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20170102162226_added_entity_PriceCategory.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20170102162227_added_entity_WorkroomMetric.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20170102162228_added_entity_Workroom.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20170102162229_added_entity_Sku.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20170102162230_added_entity_SizeType.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20170102162231_added_entity_AlterationGroup.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20170102162232_added_entity_Alteration.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20170102162233_added_entity_Color.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20170102162234_added_entity_AlterationSubGroup.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20170102162235_added_entity_AlterationDisplayType.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20170102162236_added_entity_AlterationPrice.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20170102162237_added_entity_Ticket.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20170102162238_added_entity_TicketAlteration.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20170102162239_added_entity_TicketAction.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20170102162240_added_entity_Transfer.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20170102162241_added_entity_SitUser.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20170102162311_added_entity_EntityAuditEvent.xml" relativeToChangelogFile="false"/>
+    <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
+    <include file="classpath:config/liquibase/changelog/20170102162223_added_entity_constraints_Garment.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20170102162224_added_entity_constraints_GarmentSize.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20170102162225_added_entity_constraints_Store.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20170102162228_added_entity_constraints_Workroom.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20170102162229_added_entity_constraints_Sku.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20170102162231_added_entity_constraints_AlterationGroup.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20170102162232_added_entity_constraints_Alteration.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20170102162234_added_entity_constraints_AlterationSubGroup.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20170102162236_added_entity_constraints_AlterationPrice.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20170102162237_added_entity_constraints_Ticket.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20170102162238_added_entity_constraints_TicketAlteration.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20170102162239_added_entity_constraints_TicketAction.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20170102162241_added_entity_constraints_SitUser.xml" relativeToChangelogFile="false"/>
+    <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
+</databaseChangeLog>

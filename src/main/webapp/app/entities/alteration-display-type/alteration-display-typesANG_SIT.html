@@ -1,0 +1,96 @@
+<div>
+    <h2>Alteration Display Types</h2>
+    <jhi-alert></jhi-alert>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="alteration-display-typeANG_SIT.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span >
+                        Create new Alteration Display Type
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr>
+                    <th><span>ID</span></th>
+                    <th><span>Description</span></th>
+                    <th><span>Measurement Type</span></th>
+                    <th><span>Displayprice</span></th>
+                    <th><span>Displaytime</span></th>
+                    <th><span>Displayquantity</span></th>
+                    <th><span>Displaymeasurement 1</span></th>
+                    <th><span>Displaymeasurement 2</span></th>
+                    <th><span>Enableprice</span></th>
+                    <th><span>Enabletime</span></th>
+                    <th><span>Enablequantity</span></th>
+                    <th><span>Enablemeasurement 1</span></th>
+                    <th><span>Enablemeasurement 2</span></th>
+                    <th><span>Default Price</span></th>
+                    <th><span>Default Time</span></th>
+                    <th><span>Default Quantity</span></th>
+                    <th><span>Default Measurement 1</span></th>
+                    <th><span>Default Measurement 2</span></th>
+                    <th><span>Max Measurement 1</span></th>
+                    <th><span>Max Measurement 2</span></th>
+                    <th><span>Min Measurement 1</span></th>
+                    <th><span>Min Measurement 2</span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="alterationDisplayType in vm.alterationDisplayTypes track by alterationDisplayType.id">
+                    <td><a ui-sref="alteration-display-typeANG_SIT-detail({id:alterationDisplayType.id})">{{alterationDisplayType.id}}</a></td>
+                    <td>{{alterationDisplayType.description}}</td>
+                    <td>{{alterationDisplayType.measurementType}}</td>
+                    <td>{{alterationDisplayType.displayprice}}</td>
+                    <td>{{alterationDisplayType.displaytime}}</td>
+                    <td>{{alterationDisplayType.displayquantity}}</td>
+                    <td>{{alterationDisplayType.displaymeasurement1}}</td>
+                    <td>{{alterationDisplayType.displaymeasurement2}}</td>
+                    <td>{{alterationDisplayType.enableprice}}</td>
+                    <td>{{alterationDisplayType.enabletime}}</td>
+                    <td>{{alterationDisplayType.enablequantity}}</td>
+                    <td>{{alterationDisplayType.enablemeasurement1}}</td>
+                    <td>{{alterationDisplayType.enablemeasurement2}}</td>
+                    <td>{{alterationDisplayType.defaultPrice}}</td>
+                    <td>{{alterationDisplayType.defaultTime}}</td>
+                    <td>{{alterationDisplayType.defaultQuantity}}</td>
+                    <td>{{alterationDisplayType.defaultMeasurement1}}</td>
+                    <td>{{alterationDisplayType.defaultMeasurement2}}</td>
+                    <td>{{alterationDisplayType.maxMeasurement1}}</td>
+                    <td>{{alterationDisplayType.maxMeasurement2}}</td>
+                    <td>{{alterationDisplayType.minMeasurement1}}</td>
+                    <td>{{alterationDisplayType.minMeasurement2}}</td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="alteration-display-typeANG_SIT-detail({id:alterationDisplayType.id})"
+                                    class="btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-xs hidden-sm"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="alteration-display-typeANG_SIT.edit({id:alterationDisplayType.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-xs hidden-sm"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="alteration-display-typeANG_SIT.delete({id:alterationDisplayType.id})"
+                                    class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-xs hidden-sm"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

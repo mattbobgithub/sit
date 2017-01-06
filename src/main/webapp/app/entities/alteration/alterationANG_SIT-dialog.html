@@ -1,0 +1,111 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()" show-validation>
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myAlterationLabel">Create or edit a Alteration</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" ng-show="vm.alteration.id">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.alteration.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_gender">Gender</label>
+            <select class="form-control" name="gender" ng-model="vm.alteration.gender" id="field_gender">
+                <option value="MENS">MENS</option>
+                <option value="WOMENS">WOMENS</option>
+                <option value="BOYS">BOYS</option>
+                <option value="GIRLS">GIRLS</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_activeStatus">Active Status</label>
+            <input type="checkbox" class="form-control" name="activeStatus" id="field_activeStatus"
+                    ng-model="vm.alteration.activeStatus"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_shortDescription">Short Description</label>
+            <input type="text" class="form-control" name="shortDescription" id="field_shortDescription"
+                    ng-model="vm.alteration.shortDescription"
+                    required />
+            <div ng-show="editForm.shortDescription.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.shortDescription.$error.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_longDescription">Long Description</label>
+            <input type="text" class="form-control" name="longDescription" id="field_longDescription"
+                    ng-model="vm.alteration.longDescription"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_estimatedTime">Estimated Time</label>
+            <input type="number" class="form-control" name="estimatedTime" id="field_estimatedTime"
+                    ng-model="vm.alteration.estimatedTime"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_measurement1">Measurement 1</label>
+            <input type="number" class="form-control" name="measurement1" id="field_measurement1"
+                    ng-model="vm.alteration.measurement1"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_measurement2">Measurement 2</label>
+            <input type="number" class="form-control" name="measurement2" id="field_measurement2"
+                    ng-model="vm.alteration.measurement2"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_quantity">Quantity</label>
+            <input type="number" class="form-control" name="quantity" id="field_quantity"
+                    ng-model="vm.alteration.quantity"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_shortListInd">Short List Ind</label>
+            <input type="checkbox" class="form-control" name="shortListInd" id="field_shortListInd"
+                    ng-model="vm.alteration.shortListInd"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_autoDefaultInd">Auto Default Ind</label>
+            <input type="checkbox" class="form-control" name="autoDefaultInd" id="field_autoDefaultInd"
+                    ng-model="vm.alteration.autoDefaultInd"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_groupOrderNum">Group Order Num</label>
+            <input type="number" class="form-control" name="groupOrderNum" id="field_groupOrderNum"
+                    ng-model="vm.alteration.groupOrderNum"
+                     />
+        </div>
+
+        <div class="form-group">
+            <label for="field_alterationDisplayType">Alteration Display Type</label>
+            <select class="form-control" id="field_alterationDisplayType" multiple name="alterationDisplayType" ng-model="vm.alteration.alterationDisplayTypes" ng-options="alterationDisplayType as alterationDisplayType.id for alterationDisplayType in vm.alterationdisplaytypes track by alterationDisplayType.id"></select>
+        </div>
+        <div class="form-group">
+            <label for="field_alterationSubGroup">Alteration Sub Group</label>
+            <select class="form-control" id="field_alterationSubGroup" name="alterationSubGroup" ng-model="vm.alteration.alterationSubGroupId" ng-options="alterationSubGroup.id as alterationSubGroup.id for alterationSubGroup in vm.alterationsubgroups"            >
+                <option value=""></option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

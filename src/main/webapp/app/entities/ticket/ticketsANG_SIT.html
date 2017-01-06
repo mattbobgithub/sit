@@ -1,0 +1,92 @@
+<div>
+    <h2>Tickets</h2>
+    <jhi-alert></jhi-alert>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="ticketANG_SIT.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span >
+                        Create new Ticket
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr>
+                    <th><span>ID</span></th>
+                    <th><span>Drop Date</span></th>
+                    <th><span>Promise Date</span></th>
+                    <th><span>Workroom Deadline</span></th>
+                    <th><span>Reciept Id</span></th>
+                    <th><span>Price Charged</span></th>
+                    <th><span>Purchase Type</span></th>
+                    <th><span>Priority</span></th>
+                    <th><span>Completed By</span></th>
+                    <th><span>Completed Date</span></th>
+                    <th><span>Waive Cost Indicator</span></th>
+                    <th><span>Waive Cost Reason</span></th>
+                    <th><span>Customer</span></th>
+                    <th><span>Store</span></th>
+                    <th><span>Workroom</span></th>
+                    <th><span>Transfer</span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="ticket in vm.tickets track by ticket.id">
+                    <td><a ui-sref="ticketANG_SIT-detail({id:ticket.id})">{{ticket.id}}</a></td>
+                    <td>{{ticket.dropDate | date:'medium'}}</td>
+                    <td>{{ticket.promiseDate | date:'medium'}}</td>
+                    <td>{{ticket.workroomDeadline | date:'medium'}}</td>
+                    <td>{{ticket.recieptId}}</td>
+                    <td>{{ticket.priceCharged}}</td>
+                    <td>{{ticket.purchaseType}}</td>
+                    <td>{{ticket.priority}}</td>
+                    <td>{{ticket.completedBy}}</td>
+                    <td>{{ticket.completedDate | date:'medium'}}</td>
+                    <td>{{ticket.waiveCostIndicator}}</td>
+                    <td>{{ticket.waiveCostReason}}</td>
+                    <td>
+                        <a ui-sref="customerANG_SIT-detail({id:ticket.customerId})">{{ticket.customerId}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="storeANG_SIT-detail({id:ticket.storeId})">{{ticket.storeId}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="workroomANG_SIT-detail({id:ticket.workroomId})">{{ticket.workroomId}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="transferANG_SIT-detail({id:ticket.transferId})">{{ticket.transferId}}</a>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="ticketANG_SIT-detail({id:ticket.id})"
+                                    class="btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-xs hidden-sm"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="ticketANG_SIT.edit({id:ticket.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-xs hidden-sm"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="ticketANG_SIT.delete({id:ticket.id})"
+                                    class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-xs hidden-sm"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

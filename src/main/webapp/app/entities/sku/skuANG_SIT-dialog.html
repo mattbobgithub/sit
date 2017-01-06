@@ -1,0 +1,74 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()" show-validation>
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="mySkuLabel">Create or edit a Sku</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" ng-show="vm.sku.id">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.sku.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_description">Description</label>
+            <input type="text" class="form-control" name="description" id="field_description"
+                    ng-model="vm.sku.description"
+                    required />
+            <div ng-show="editForm.description.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.description.$error.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_skuCode">Sku Code</label>
+            <input type="text" class="form-control" name="skuCode" id="field_skuCode"
+                    ng-model="vm.sku.skuCode"
+                    required />
+            <div ng-show="editForm.skuCode.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.skuCode.$error.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="field_garmentSize">Garment Size</label>
+            <select class="form-control" id="field_garmentSize" name="garmentSize" ng-model="vm.sku.garmentSizeId" ng-options="garmentSize.id as garmentSize.id for garmentSize in vm.garmentsizes"            >
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="field_garment">Garment</label>
+            <select class="form-control" id="field_garment" name="garment" ng-model="vm.sku.garmentId" ng-options="garment.id as garment.id for garment in vm.garments"            >
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="field_sizeType">Size Type</label>
+            <select class="form-control" id="field_sizeType" name="sizeType" ng-model="vm.sku.sizeTypeId" ng-options="sizeType.id as sizeType.id for sizeType in vm.sizetypes"            >
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="field_color">Color</label>
+            <select class="form-control" id="field_color" name="color" ng-model="vm.sku.colorId" ng-options="color.id as color.id for color in vm.colors"            >
+                <option value=""></option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

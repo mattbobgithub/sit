@@ -1,0 +1,42 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "workroomMetric",
+            "otherEntityName": "workroomMetric",
+            "otherEntityField": "id",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "workroom"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "workroomUser",
+            "otherEntityName": "sitUser",
+            "otherEntityRelationshipName": "workroom"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "description",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "phone",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "centralWorkroomIndicator",
+            "fieldType": "Boolean"
+        }
+    ],
+    "changelogDate": "20170102162228",
+    "entityTableName": "workroom",
+    "dto": "mapstruct",
+    "pagination": "no",
+    "service": "serviceClass",
+    "angularJSSuffix": "ANG_SIT"
+}

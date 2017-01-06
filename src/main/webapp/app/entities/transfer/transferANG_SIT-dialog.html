@@ -1,0 +1,47 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()">
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myTransferLabel">Create or edit a Transfer</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" ng-show="vm.transfer.id">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.transfer.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_fromWorkroomId">From Workroom Id</label>
+            <input type="number" class="form-control" name="fromWorkroomId" id="field_fromWorkroomId"
+                    ng-model="vm.transfer.fromWorkroomId"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_toWorkroomId">To Workroom Id</label>
+            <input type="number" class="form-control" name="toWorkroomId" id="field_toWorkroomId"
+                    ng-model="vm.transfer.toWorkroomId"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_status">Status</label>
+            <select class="form-control" name="status" ng-model="vm.transfer.status" id="field_status">
+                <option value="OUT">OUT</option>
+                <option value="ENROUTE">ENROUTE</option>
+                <option value="RECEIVED">RECEIVED</option>
+                <option value="RETURN">RETURN</option>
+            </select>
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

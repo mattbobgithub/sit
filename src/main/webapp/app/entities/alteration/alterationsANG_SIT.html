@@ -1,0 +1,86 @@
+<div>
+    <h2>Alterations</h2>
+    <jhi-alert></jhi-alert>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="alterationANG_SIT.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span >
+                        Create new Alteration
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr>
+                    <th><span>ID</span></th>
+                    <th><span>Gender</span></th>
+                    <th><span>Active Status</span></th>
+                    <th><span>Short Description</span></th>
+                    <th><span>Long Description</span></th>
+                    <th><span>Estimated Time</span></th>
+                    <th><span>Measurement 1</span></th>
+                    <th><span>Measurement 2</span></th>
+                    <th><span>Quantity</span></th>
+                    <th><span>Short List Ind</span></th>
+                    <th><span>Auto Default Ind</span></th>
+                    <th><span>Group Order Num</span></th>
+                    <th><span>Alteration Display Type</span></th>
+                    <th><span>Alteration Sub Group</span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="alteration in vm.alterations track by alteration.id">
+                    <td><a ui-sref="alterationANG_SIT-detail({id:alteration.id})">{{alteration.id}}</a></td>
+                    <td>{{alteration.gender}}</td>
+                    <td>{{alteration.activeStatus}}</td>
+                    <td>{{alteration.shortDescription}}</td>
+                    <td>{{alteration.longDescription}}</td>
+                    <td>{{alteration.estimatedTime}}</td>
+                    <td>{{alteration.measurement1}}</td>
+                    <td>{{alteration.measurement2}}</td>
+                    <td>{{alteration.quantity}}</td>
+                    <td>{{alteration.shortListInd}}</td>
+                    <td>{{alteration.autoDefaultInd}}</td>
+                    <td>{{alteration.groupOrderNum}}</td>
+                    <td>
+                        <span ng-repeat="alterationDisplayType in alteration.alterationDisplayTypes">
+                            <a class="form-control-static" ui-sref="alteration-display-typeANG_SIT-detail({id: alterationDisplayType.id})">{{alterationDisplayType.id}}</a>{{$last ? '' : ', '}}
+                        </span>
+                    </td>
+                    <td>
+                        <a ui-sref="alteration-sub-groupANG_SIT-detail({id:alteration.alterationSubGroupId})">{{alteration.alterationSubGroupId}}</a>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="alterationANG_SIT-detail({id:alteration.id})"
+                                    class="btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-xs hidden-sm"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="alterationANG_SIT.edit({id:alteration.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-xs hidden-sm"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="alterationANG_SIT.delete({id:alteration.id})"
+                                    class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-xs hidden-sm"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

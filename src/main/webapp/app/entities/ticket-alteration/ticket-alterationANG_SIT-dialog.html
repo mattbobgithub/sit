@@ -1,0 +1,101 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()">
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myTicketAlterationLabel">Create or edit a Ticket Alteration</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" ng-show="vm.ticketAlteration.id">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.ticketAlteration.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_lineNumber">Line Number</label>
+            <input type="number" class="form-control" name="lineNumber" id="field_lineNumber"
+                    ng-model="vm.ticketAlteration.lineNumber"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_gender">Gender</label>
+            <select class="form-control" name="gender" ng-model="vm.ticketAlteration.gender" id="field_gender">
+                <option value="MENS">MENS</option>
+                <option value="WOMENS">WOMENS</option>
+                <option value="BOYS">BOYS</option>
+                <option value="GIRLS">GIRLS</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_altId">Alt Id</label>
+            <input type="number" class="form-control" name="altId" id="field_altId"
+                    ng-model="vm.ticketAlteration.altId"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_description">Description</label>
+            <input type="text" class="form-control" name="description" id="field_description"
+                    ng-model="vm.ticketAlteration.description"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_tagType">Tag Type</label>
+            <input type="text" class="form-control" name="tagType" id="field_tagType"
+                    ng-model="vm.ticketAlteration.tagType"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_estimateTime">Estimate Time</label>
+            <input type="number" class="form-control" name="estimateTime" id="field_estimateTime"
+                    ng-model="vm.ticketAlteration.estimateTime"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_price">Price</label>
+            <input type="number" class="form-control" name="price" id="field_price"
+                    ng-model="vm.ticketAlteration.price"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_measurement1">Measurement 1</label>
+            <input type="number" class="form-control" name="measurement1" id="field_measurement1"
+                    ng-model="vm.ticketAlteration.measurement1"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_measurement2">Measurement 2</label>
+            <input type="number" class="form-control" name="measurement2" id="field_measurement2"
+                    ng-model="vm.ticketAlteration.measurement2"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_quantity">Quantity</label>
+            <input type="number" class="form-control" name="quantity" id="field_quantity"
+                    ng-model="vm.ticketAlteration.quantity"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_completeIndicator">Complete Indicator</label>
+            <input type="checkbox" class="form-control" name="completeIndicator" id="field_completeIndicator"
+                    ng-model="vm.ticketAlteration.completeIndicator"
+                     />
+        </div>
+
+        <div class="form-group">
+            <label for="field_ticket">Ticket</label>
+            <select class="form-control" id="field_ticket" name="ticket" ng-model="vm.ticketAlteration.ticketId" ng-options="ticket.id as ticket.id for ticket in vm.tickets"            >
+                <option value=""></option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

@@ -1,0 +1,79 @@
+
+<div>
+    <h2><span>Ticket</span> {{vm.ticket.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span>Drop Date</span></dt>
+        <dd>
+            <span>{{vm.ticket.dropDate | date:'medium'}}</span>
+        </dd>
+        <dt><span>Promise Date</span></dt>
+        <dd>
+            <span>{{vm.ticket.promiseDate | date:'medium'}}</span>
+        </dd>
+        <dt><span>Workroom Deadline</span></dt>
+        <dd>
+            <span>{{vm.ticket.workroomDeadline | date:'medium'}}</span>
+        </dd>
+        <dt><span>Reciept Id</span></dt>
+        <dd>
+            <span>{{vm.ticket.recieptId}}</span>
+        </dd>
+        <dt><span>Price Charged</span></dt>
+        <dd>
+            <span>{{vm.ticket.priceCharged}}</span>
+        </dd>
+        <dt><span>Purchase Type</span></dt>
+        <dd>
+            <span>{{vm.ticket.purchaseType}}</span>
+        </dd>
+        <dt><span>Priority</span></dt>
+        <dd>
+            <span>{{vm.ticket.priority}}</span>
+        </dd>
+        <dt><span>Completed By</span></dt>
+        <dd>
+            <span>{{vm.ticket.completedBy}}</span>
+        </dd>
+        <dt><span>Completed Date</span></dt>
+        <dd>
+            <span>{{vm.ticket.completedDate | date:'medium'}}</span>
+        </dd>
+        <dt><span>Waive Cost Indicator</span></dt>
+        <dd>
+            <span>{{vm.ticket.waiveCostIndicator}}</span>
+        </dd>
+        <dt><span>Waive Cost Reason</span></dt>
+        <dd>
+            <span>{{vm.ticket.waiveCostReason}}</span>
+        </dd>
+        <dt><span>Customer</span></dt>
+        <dd>
+            <a ui-sref="customerANG_SIT-detail({id:vm.ticket.customerId})">{{vm.ticket.customerId}}</a>
+        </dd>
+        <dt><span>Store</span></dt>
+        <dd>
+            <a ui-sref="storeANG_SIT-detail({id:vm.ticket.storeId})">{{vm.ticket.storeId}}</a>
+        </dd>
+        <dt><span>Workroom</span></dt>
+        <dd>
+            <a ui-sref="workroomANG_SIT-detail({id:vm.ticket.workroomId})">{{vm.ticket.workroomId}}</a>
+        </dd>
+        <dt><span>Transfer</span></dt>
+        <dd>
+            <a ui-sref="transferANG_SIT-detail({id:vm.ticket.transferId})">{{vm.ticket.transferId}}</a>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button" ui-sref="ticketANG_SIT-detail.edit({id:vm.ticket.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-xs hidden-sm"> Edit</span>
+    </button>
+</div>

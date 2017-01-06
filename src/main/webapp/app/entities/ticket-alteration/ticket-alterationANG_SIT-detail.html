@@ -1,0 +1,67 @@
+
+<div>
+    <h2><span>Ticket Alteration</span> {{vm.ticketAlteration.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span>Line Number</span></dt>
+        <dd>
+            <span>{{vm.ticketAlteration.lineNumber}}</span>
+        </dd>
+        <dt><span>Gender</span></dt>
+        <dd>
+            <span>{{vm.ticketAlteration.gender}}</span>
+        </dd>
+        <dt><span>Alt Id</span></dt>
+        <dd>
+            <span>{{vm.ticketAlteration.altId}}</span>
+        </dd>
+        <dt><span>Description</span></dt>
+        <dd>
+            <span>{{vm.ticketAlteration.description}}</span>
+        </dd>
+        <dt><span>Tag Type</span></dt>
+        <dd>
+            <span>{{vm.ticketAlteration.tagType}}</span>
+        </dd>
+        <dt><span>Estimate Time</span></dt>
+        <dd>
+            <span>{{vm.ticketAlteration.estimateTime}}</span>
+        </dd>
+        <dt><span>Price</span></dt>
+        <dd>
+            <span>{{vm.ticketAlteration.price}}</span>
+        </dd>
+        <dt><span>Measurement 1</span></dt>
+        <dd>
+            <span>{{vm.ticketAlteration.measurement1}}</span>
+        </dd>
+        <dt><span>Measurement 2</span></dt>
+        <dd>
+            <span>{{vm.ticketAlteration.measurement2}}</span>
+        </dd>
+        <dt><span>Quantity</span></dt>
+        <dd>
+            <span>{{vm.ticketAlteration.quantity}}</span>
+        </dd>
+        <dt><span>Complete Indicator</span></dt>
+        <dd>
+            <span>{{vm.ticketAlteration.completeIndicator}}</span>
+        </dd>
+        <dt><span>Ticket</span></dt>
+        <dd>
+            <a ui-sref="ticketANG_SIT-detail({id:vm.ticketAlteration.ticketId})">{{vm.ticketAlteration.ticketId}}</a>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button" ui-sref="ticket-alterationANG_SIT-detail.edit({id:vm.ticketAlteration.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-xs hidden-sm"> Edit</span>
+    </button>
+</div>

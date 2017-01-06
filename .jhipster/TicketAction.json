@@ -1,0 +1,32 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "ticket",
+            "otherEntityName": "ticket",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "actionType",
+            "fieldType": "ActionType",
+            "fieldValues": "NEW,TRANSFER_REQUEST,TRANSFER_OUT,RECEIVED,IN_PROCESS,TRANSFER_RETURN,PICKED_UP,SHIPPED"
+        },
+        {
+            "fieldName": "actionDate",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "actionBy",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20170102162239",
+    "entityTableName": "ticket_action",
+    "dto": "mapstruct",
+    "pagination": "no",
+    "service": "serviceClass",
+    "angularJSSuffix": "ANG_SIT"
+}

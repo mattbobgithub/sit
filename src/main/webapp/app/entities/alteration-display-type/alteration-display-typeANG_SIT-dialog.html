@@ -1,0 +1,160 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()" show-validation>
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myAlterationDisplayTypeLabel">Create or edit a Alteration Display Type</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" ng-show="vm.alterationDisplayType.id">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.alterationDisplayType.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_description">Description</label>
+            <input type="text" class="form-control" name="description" id="field_description"
+                    ng-model="vm.alterationDisplayType.description"
+                    required />
+            <div ng-show="editForm.description.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.description.$error.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_measurementType">Measurement Type</label>
+            <select class="form-control" name="measurementType" ng-model="vm.alterationDisplayType.measurementType" id="field_measurementType">
+                <option value="NONE">NONE</option>
+                <option value="PANTS">PANTS</option>
+                <option value="HEM">HEM</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_displayprice">Displayprice</label>
+            <input type="checkbox" class="form-control" name="displayprice" id="field_displayprice"
+                    ng-model="vm.alterationDisplayType.displayprice"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_displaytime">Displaytime</label>
+            <input type="checkbox" class="form-control" name="displaytime" id="field_displaytime"
+                    ng-model="vm.alterationDisplayType.displaytime"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_displayquantity">Displayquantity</label>
+            <input type="checkbox" class="form-control" name="displayquantity" id="field_displayquantity"
+                    ng-model="vm.alterationDisplayType.displayquantity"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_displaymeasurement1">Displaymeasurement 1</label>
+            <input type="checkbox" class="form-control" name="displaymeasurement1" id="field_displaymeasurement1"
+                    ng-model="vm.alterationDisplayType.displaymeasurement1"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_displaymeasurement2">Displaymeasurement 2</label>
+            <input type="checkbox" class="form-control" name="displaymeasurement2" id="field_displaymeasurement2"
+                    ng-model="vm.alterationDisplayType.displaymeasurement2"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_enableprice">Enableprice</label>
+            <input type="checkbox" class="form-control" name="enableprice" id="field_enableprice"
+                    ng-model="vm.alterationDisplayType.enableprice"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_enabletime">Enabletime</label>
+            <input type="checkbox" class="form-control" name="enabletime" id="field_enabletime"
+                    ng-model="vm.alterationDisplayType.enabletime"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_enablequantity">Enablequantity</label>
+            <input type="checkbox" class="form-control" name="enablequantity" id="field_enablequantity"
+                    ng-model="vm.alterationDisplayType.enablequantity"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_enablemeasurement1">Enablemeasurement 1</label>
+            <input type="checkbox" class="form-control" name="enablemeasurement1" id="field_enablemeasurement1"
+                    ng-model="vm.alterationDisplayType.enablemeasurement1"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_enablemeasurement2">Enablemeasurement 2</label>
+            <input type="checkbox" class="form-control" name="enablemeasurement2" id="field_enablemeasurement2"
+                    ng-model="vm.alterationDisplayType.enablemeasurement2"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_defaultPrice">Default Price</label>
+            <input type="number" class="form-control" name="defaultPrice" id="field_defaultPrice"
+                    ng-model="vm.alterationDisplayType.defaultPrice"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_defaultTime">Default Time</label>
+            <input type="number" class="form-control" name="defaultTime" id="field_defaultTime"
+                    ng-model="vm.alterationDisplayType.defaultTime"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_defaultQuantity">Default Quantity</label>
+            <input type="number" class="form-control" name="defaultQuantity" id="field_defaultQuantity"
+                    ng-model="vm.alterationDisplayType.defaultQuantity"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_defaultMeasurement1">Default Measurement 1</label>
+            <input type="number" class="form-control" name="defaultMeasurement1" id="field_defaultMeasurement1"
+                    ng-model="vm.alterationDisplayType.defaultMeasurement1"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_defaultMeasurement2">Default Measurement 2</label>
+            <input type="number" class="form-control" name="defaultMeasurement2" id="field_defaultMeasurement2"
+                    ng-model="vm.alterationDisplayType.defaultMeasurement2"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_maxMeasurement1">Max Measurement 1</label>
+            <input type="number" class="form-control" name="maxMeasurement1" id="field_maxMeasurement1"
+                    ng-model="vm.alterationDisplayType.maxMeasurement1"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_maxMeasurement2">Max Measurement 2</label>
+            <input type="number" class="form-control" name="maxMeasurement2" id="field_maxMeasurement2"
+                    ng-model="vm.alterationDisplayType.maxMeasurement2"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_minMeasurement1">Min Measurement 1</label>
+            <input type="number" class="form-control" name="minMeasurement1" id="field_minMeasurement1"
+                    ng-model="vm.alterationDisplayType.minMeasurement1"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_minMeasurement2">Min Measurement 2</label>
+            <input type="number" class="form-control" name="minMeasurement2" id="field_minMeasurement2"
+                    ng-model="vm.alterationDisplayType.minMeasurement2"
+                     />
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

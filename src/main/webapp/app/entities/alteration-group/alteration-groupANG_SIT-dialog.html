@@ -1,0 +1,51 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()" show-validation>
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myAlterationGroupLabel">Create or edit a Alteration Group</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" ng-show="vm.alterationGroup.id">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.alterationGroup.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_description">Description</label>
+            <input type="text" class="form-control" name="description" id="field_description"
+                    ng-model="vm.alterationGroup.description"
+                    required />
+            <div ng-show="editForm.description.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.description.$error.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_gender">Gender</label>
+            <select class="form-control" name="gender" ng-model="vm.alterationGroup.gender" id="field_gender">
+                <option value="MENS">MENS</option>
+                <option value="WOMENS">WOMENS</option>
+                <option value="BOYS">BOYS</option>
+                <option value="GIRLS">GIRLS</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="field_garment">Garment</label>
+            <select class="form-control" id="field_garment" multiple name="garment" ng-model="vm.alterationGroup.garments" ng-options="garment as garment.id for garment in vm.garments track by garment.id"></select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

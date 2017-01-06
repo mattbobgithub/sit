@@ -1,0 +1,80 @@
+<div>
+    <h2>Sit Users</h2>
+    <jhi-alert></jhi-alert>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="sit-userANG_SIT.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span >
+                        Create new Sit User
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr>
+                    <th><span>ID</span></th>
+                    <th><span>Username</span></th>
+                    <th><span>Email</span></th>
+                    <th><span>User Type</span></th>
+                    <th><span>Fitter Indicator</span></th>
+                    <th><span>Manager Approval Code</span></th>
+                    <th><span>Company</span></th>
+                    <th><span>Store</span></th>
+                    <th><span>Workroom</span></th>
+                    <th><span>User</span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="sitUser in vm.sitUsers track by sitUser.id">
+                    <td><a ui-sref="sit-userANG_SIT-detail({id:sitUser.id})">{{sitUser.id}}</a></td>
+                    <td>{{sitUser.username}}</td>
+                    <td>{{sitUser.email}}</td>
+                    <td>{{sitUser.userType}}</td>
+                    <td>{{sitUser.fitterIndicator}}</td>
+                    <td>{{sitUser.managerApprovalCode}}</td>
+                    <td>
+                        <a ui-sref="companyANG_SIT-detail({id:sitUser.companyId})">{{sitUser.companyId}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="storeANG_SIT-detail({id:sitUser.storeId})">{{sitUser.storeId}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="workroomANG_SIT-detail({id:sitUser.workroomId})">{{sitUser.workroomId}}</a>
+                    </td>
+                    <td>
+                        {{sitUser.userId}}
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="sit-userANG_SIT-detail({id:sitUser.id})"
+                                    class="btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-xs hidden-sm"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="sit-userANG_SIT.edit({id:sitUser.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-xs hidden-sm"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="sit-userANG_SIT.delete({id:sitUser.id})"
+                                    class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-xs hidden-sm"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

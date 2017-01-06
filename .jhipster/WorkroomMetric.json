@@ -1,0 +1,24 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "defaultFittingTimeMins",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "efficiencyPercentage",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "utilizationPercentage",
+            "fieldType": "Double"
+        }
+    ],
+    "changelogDate": "20170102162227",
+    "entityTableName": "workroom_metric",
+    "dto": "mapstruct",
+    "pagination": "no",
+    "service": "serviceClass",
+    "angularJSSuffix": "ANG_SIT"
+}

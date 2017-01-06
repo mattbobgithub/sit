@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+    <!--
+        Added the constraints for entity SitUser.
+    -->
+    <changeSet id="20170102162241-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="company_id"
+                                 baseTableName="sit_user"
+                                 constraintName="fk_sit_user_company_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="company"/>
+
+        <addForeignKeyConstraint baseColumnNames="store_id"
+                                 baseTableName="sit_user"
+                                 constraintName="fk_sit_user_store_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="store"/>
+
+        <addForeignKeyConstraint baseColumnNames="workroom_id"
+                                 baseTableName="sit_user"
+                                 constraintName="fk_sit_user_workroom_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="workroom"/>
+
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="sit_user"
+                                 constraintName="fk_sit_user_user_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_user"/>
+
+    </changeSet>
+</databaseChangeLog>

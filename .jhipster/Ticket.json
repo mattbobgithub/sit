@@ -1,0 +1,96 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "ticketAlteration",
+            "otherEntityName": "ticketAlteration",
+            "otherEntityRelationshipName": "ticket"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "ticketAction",
+            "otherEntityName": "ticketAction",
+            "otherEntityRelationshipName": "ticket"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "customer",
+            "otherEntityName": "customer",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "store",
+            "otherEntityName": "store",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "workroom",
+            "otherEntityName": "workroom",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipName": "transfer",
+            "otherEntityName": "transfer",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "dropDate",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "promiseDate",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "workroomDeadline",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "recieptId",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "priceCharged",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "purchaseType",
+            "fieldType": "PurchaseType",
+            "fieldValues": "NEW,RETURN,CUSTOMER_OWNED"
+        },
+        {
+            "fieldName": "priority",
+            "fieldType": "TicketPriority",
+            "fieldValues": "NORMAL,HIGH,HIGH_OVERNIGHT"
+        },
+        {
+            "fieldName": "completedBy",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "completedDate",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "waiveCostIndicator",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "waiveCostReason",
+            "fieldType": "WaiveCostReason",
+            "fieldValues": "SALES_PREFERENCE,LOYALTY,SALE"
+        }
+    ],
+    "changelogDate": "20170102162237",
+    "entityTableName": "ticket",
+    "dto": "mapstruct",
+    "pagination": "no",
+    "service": "serviceClass",
+    "angularJSSuffix": "ANG_SIT"
+}

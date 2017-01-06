@@ -1,0 +1,39 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "alterationSubGroup",
+            "otherEntityName": "alterationSubGroup",
+            "otherEntityRelationshipName": "alterationGroup"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityRelationshipName": "alterationGroup",
+            "relationshipName": "garment",
+            "otherEntityName": "garment",
+            "otherEntityField": "id",
+            "ownerSide": true
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "description",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "gender",
+            "fieldType": "Gender",
+            "fieldValues": "MENS,WOMENS,BOYS,GIRLS"
+        }
+    ],
+    "changelogDate": "20170102162231",
+    "entityTableName": "alteration_group",
+    "dto": "mapstruct",
+    "pagination": "no",
+    "service": "serviceClass",
+    "angularJSSuffix": "ANG_SIT"
+}

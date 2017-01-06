@@ -1,0 +1,43 @@
+
+<div>
+    <h2><span>Sku</span> {{vm.sku.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span>Description</span></dt>
+        <dd>
+            <span>{{vm.sku.description}}</span>
+        </dd>
+        <dt><span>Sku Code</span></dt>
+        <dd>
+            <span>{{vm.sku.skuCode}}</span>
+        </dd>
+        <dt><span>Garment Size</span></dt>
+        <dd>
+            <a ui-sref="garment-sizeANG_SIT-detail({id:vm.sku.garmentSizeId})">{{vm.sku.garmentSizeId}}</a>
+        </dd>
+        <dt><span>Garment</span></dt>
+        <dd>
+            <a ui-sref="garmentANG_SIT-detail({id:vm.sku.garmentId})">{{vm.sku.garmentId}}</a>
+        </dd>
+        <dt><span>Size Type</span></dt>
+        <dd>
+            <a ui-sref="size-typeANG_SIT-detail({id:vm.sku.sizeTypeId})">{{vm.sku.sizeTypeId}}</a>
+        </dd>
+        <dt><span>Color</span></dt>
+        <dd>
+            <a ui-sref="colorANG_SIT-detail({id:vm.sku.colorId})">{{vm.sku.colorId}}</a>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button" ui-sref="skuANG_SIT-detail.edit({id:vm.sku.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-xs hidden-sm"> Edit</span>
+    </button>
+</div>

@@ -1,0 +1,27 @@
+
+<div>
+    <h2><span>Garment Size</span> {{vm.garmentSize.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span>Description</span></dt>
+        <dd>
+            <span>{{vm.garmentSize.description}}</span>
+        </dd>
+        <dt><span>Size Type</span></dt>
+        <dd>
+            <a ui-sref="size-typeANG_SIT-detail({id:vm.garmentSize.sizeTypeId})">{{vm.garmentSize.sizeTypeId}}</a>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button" ui-sref="garment-sizeANG_SIT-detail.edit({id:vm.garmentSize.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-xs hidden-sm"> Edit</span>
+    </button>
+</div>

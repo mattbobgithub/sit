@@ -1,0 +1,103 @@
+
+<div>
+    <h2><span>Alteration Display Type</span> {{vm.alterationDisplayType.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span>Description</span></dt>
+        <dd>
+            <span>{{vm.alterationDisplayType.description}}</span>
+        </dd>
+        <dt><span>Measurement Type</span></dt>
+        <dd>
+            <span>{{vm.alterationDisplayType.measurementType}}</span>
+        </dd>
+        <dt><span>Displayprice</span></dt>
+        <dd>
+            <span>{{vm.alterationDisplayType.displayprice}}</span>
+        </dd>
+        <dt><span>Displaytime</span></dt>
+        <dd>
+            <span>{{vm.alterationDisplayType.displaytime}}</span>
+        </dd>
+        <dt><span>Displayquantity</span></dt>
+        <dd>
+            <span>{{vm.alterationDisplayType.displayquantity}}</span>
+        </dd>
+        <dt><span>Displaymeasurement 1</span></dt>
+        <dd>
+            <span>{{vm.alterationDisplayType.displaymeasurement1}}</span>
+        </dd>
+        <dt><span>Displaymeasurement 2</span></dt>
+        <dd>
+            <span>{{vm.alterationDisplayType.displaymeasurement2}}</span>
+        </dd>
+        <dt><span>Enableprice</span></dt>
+        <dd>
+            <span>{{vm.alterationDisplayType.enableprice}}</span>
+        </dd>
+        <dt><span>Enabletime</span></dt>
+        <dd>
+            <span>{{vm.alterationDisplayType.enabletime}}</span>
+        </dd>
+        <dt><span>Enablequantity</span></dt>
+        <dd>
+            <span>{{vm.alterationDisplayType.enablequantity}}</span>
+        </dd>
+        <dt><span>Enablemeasurement 1</span></dt>
+        <dd>
+            <span>{{vm.alterationDisplayType.enablemeasurement1}}</span>
+        </dd>
+        <dt><span>Enablemeasurement 2</span></dt>
+        <dd>
+            <span>{{vm.alterationDisplayType.enablemeasurement2}}</span>
+        </dd>
+        <dt><span>Default Price</span></dt>
+        <dd>
+            <span>{{vm.alterationDisplayType.defaultPrice}}</span>
+        </dd>
+        <dt><span>Default Time</span></dt>
+        <dd>
+            <span>{{vm.alterationDisplayType.defaultTime}}</span>
+        </dd>
+        <dt><span>Default Quantity</span></dt>
+        <dd>
+            <span>{{vm.alterationDisplayType.defaultQuantity}}</span>
+        </dd>
+        <dt><span>Default Measurement 1</span></dt>
+        <dd>
+            <span>{{vm.alterationDisplayType.defaultMeasurement1}}</span>
+        </dd>
+        <dt><span>Default Measurement 2</span></dt>
+        <dd>
+            <span>{{vm.alterationDisplayType.defaultMeasurement2}}</span>
+        </dd>
+        <dt><span>Max Measurement 1</span></dt>
+        <dd>
+            <span>{{vm.alterationDisplayType.maxMeasurement1}}</span>
+        </dd>
+        <dt><span>Max Measurement 2</span></dt>
+        <dd>
+            <span>{{vm.alterationDisplayType.maxMeasurement2}}</span>
+        </dd>
+        <dt><span>Min Measurement 1</span></dt>
+        <dd>
+            <span>{{vm.alterationDisplayType.minMeasurement1}}</span>
+        </dd>
+        <dt><span>Min Measurement 2</span></dt>
+        <dd>
+            <span>{{vm.alterationDisplayType.minMeasurement2}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button" ui-sref="alteration-display-typeANG_SIT-detail.edit({id:vm.alterationDisplayType.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-xs hidden-sm"> Edit</span>
+    </button>
+</div>

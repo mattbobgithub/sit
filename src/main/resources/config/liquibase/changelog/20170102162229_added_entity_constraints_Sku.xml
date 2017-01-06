@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+    <!--
+        Added the constraints for entity Sku.
+    -->
+    <changeSet id="20170102162229-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="garment_size_id"
+                                 baseTableName="sku"
+                                 constraintName="fk_sku_garment_size_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="garment_size"/>
+
+        <addForeignKeyConstraint baseColumnNames="garment_id"
+                                 baseTableName="sku"
+                                 constraintName="fk_sku_garment_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="garment"/>
+
+        <addForeignKeyConstraint baseColumnNames="size_type_id"
+                                 baseTableName="sku"
+                                 constraintName="fk_sku_size_type_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="size_type"/>
+
+        <addForeignKeyConstraint baseColumnNames="color_id"
+                                 baseTableName="sku"
+                                 constraintName="fk_sku_color_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="color"/>
+
+    </changeSet>
+</databaseChangeLog>
