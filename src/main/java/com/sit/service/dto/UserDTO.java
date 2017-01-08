@@ -1,13 +1,12 @@
 package com.sit.service.dto;
 
 import com.sit.config.Constants;
-
 import com.sit.domain.Authority;
 import com.sit.domain.User;
-
 import org.hibernate.validator.constraints.Email;
 
-import javax.validation.constraints.*;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -37,6 +36,10 @@ public class UserDTO {
 
     private Set<String> authorities;
 
+    // MTC manually add sitid to user
+    private Long sitid;
+
+
     public UserDTO() {
     }
 
@@ -44,11 +47,11 @@ public class UserDTO {
         this(user.getLogin(), user.getFirstName(), user.getLastName(),
             user.getEmail(), user.getActivated(), user.getLangKey(),
             user.getAuthorities().stream().map(Authority::getName)
-                .collect(Collectors.toSet()));
+                .collect(Collectors.toSet()), user.getSitid());
     }
 
     public UserDTO(String login, String firstName, String lastName,
-        String email, boolean activated, String langKey, Set<String> authorities) {
+        String email, boolean activated, String langKey, Set<String> authorities, Long sitid) {
 
         this.login = login;
         this.firstName = firstName;
@@ -57,6 +60,7 @@ public class UserDTO {
         this.activated = activated;
         this.langKey = langKey;
         this.authorities = authorities;
+        this.sitid = sitid;
     }
 
     public String getLogin() {
@@ -86,6 +90,8 @@ public class UserDTO {
     public Set<String> getAuthorities() {
         return authorities;
     }
+
+    public Long getSitid() { return sitid; }
 
     @Override
     public String toString() {

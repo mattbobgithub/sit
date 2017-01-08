@@ -138,7 +138,7 @@ public class UserResource {
         }
         userService.updateUser(managedUserVM.getId(), managedUserVM.getLogin(), managedUserVM.getFirstName(),
             managedUserVM.getLastName(), managedUserVM.getEmail(), managedUserVM.isActivated(),
-            managedUserVM.getLangKey(), managedUserVM.getAuthorities());
+            managedUserVM.getLangKey(), managedUserVM.getAuthorities(), managedUserVM.getSitid());
         //MTC update SitUser object
         SitUserDTO sitUserDTO = new SitUserDTO(managedUserVM);
         sitUserDTO = sitUserService.save(sitUserDTO);

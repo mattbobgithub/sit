@@ -85,6 +85,13 @@ public class User extends AbstractAuditingEntity implements Serializable {
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Authority> authorities = new HashSet<>();
 
+    // MTC manually add sitid to user
+    @Column(name = "sitid")
+    private Long sitid;
+
+
+    //getters setters
+
     public Long getId() {
         return id;
     }
@@ -180,6 +187,14 @@ public class User extends AbstractAuditingEntity implements Serializable {
 
     public void setAuthorities(Set<Authority> authorities) {
         this.authorities = authorities;
+    }
+
+    // MTC manually add sitid to user
+    public Long getSitid() {
+        return sitid;
+    }
+    public void setSitid(Long sitid) {
+        this.sitid = sitid;
     }
 
     @Override

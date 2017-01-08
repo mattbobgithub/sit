@@ -27,7 +27,7 @@ import java.util.Set;
  * Service class for managing users.
  */
 @Service
-@Transactional(value="masterTransactionManager")
+@Transactional
 public class UserService {
 
     private final Logger log = LoggerFactory.getLogger(UserService.class);
@@ -83,7 +83,7 @@ public class UserService {
     }
 
     public User createUser(String login, String password, String firstName, String lastName, String email,
-        String langKey) {
+        String langKey, Long sitid) {
 
         User newUser = new User();
         Authority authority = authorityRepository.findOne(AuthoritiesConstants.USER);
@@ -102,6 +102,10 @@ public class UserService {
         newUser.setActivationKey(RandomUtil.generateActivationKey());
         authorities.add(authority);
         newUser.setAuthorities(authorities);
+
+        //MTC add sitid
+        newUser.setSitid(sitid);
+
         userRepository.save(newUser);
         log.debug("Created Information for User: {}", newUser);
         return newUser;
@@ -130,6 +134,9 @@ public class UserService {
         user.setResetKey(RandomUtil.generateResetKey());
         user.setResetDate(ZonedDateTime.now());
         user.setActivated(true);
+        //MTC - add sitid
+        user.setSitid(managedUserVM.getSitid());
+
         userRepository.save(user);
         log.debug("Created Information for User: {}", user);
         return user;
@@ -146,7 +153,7 @@ public class UserService {
     }
 
     public void updateUser(Long id, String login, String firstName, String lastName, String email,
-        boolean activated, String langKey, Set<String> authorities) {
+        boolean activated, String langKey, Set<String> authorities, Long sitid) {
 
         Optional.of(userRepository
             .findOne(id))
@@ -162,6 +169,9 @@ public class UserService {
                 authorities.forEach(
                     authority -> managedAuthorities.add(authorityRepository.findOne(authority))
                 );
+                //MTC add sitid
+                user.setSitid(sitid);
+
                 log.debug("Changed Information for User: {}", user);
             });
     }

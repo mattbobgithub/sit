@@ -40,13 +40,23 @@ public class JWTFilter extends GenericFilterBean {
             if (StringUtils.hasText(jwt)) {
                 if (this.tokenProvider.validateToken(jwt)) {
                     Authentication authentication = this.tokenProvider.getAuthentication(jwt);
-                    log.info("token is:" + jwt);
+
+                    ///////////////////// BEGIN CHECK FOR TENANTID IN JWT ////////////////////////////////////////
+                    log.info("JWT FILTER CHECK ##########################  token is:" + jwt);
                     //MTC get tenant id
                     String tid = this.tokenProvider.getTenantId(jwt);
-                    log.info("received Tenant ID from token is: " + tid + " ...setting tenant context here!!" );
-                    TenantContext.setCurrentTenant(tid);
+                    log.info("JWT FILTER CHECK #######################  received Tenant ID from token is: " + tid + " ...setting tenant context here!!" );
 
-                    SecurityContextHolder.getContext().setAuthentication(authentication);
+                    if (StringUtils.isEmpty(tid)) {
+                        log.info("JWT FILTER CHECK #######################  USER HAS NO TENANT DEFINED");
+                        ((HttpServletResponse) servletResponse).setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+                    }
+                    else {
+                        TenantContext.setCurrentTenant(tid);
+                        SecurityContextHolder.getContext().setAuthentication(authentication);
+                    }
+                    ///////////////////// END CHECK FOR TENANTID IN JWT //////////////////////////////////////////
+
                 }
             }
             filterChain.doFilter(servletRequest, servletResponse);

@@ -154,6 +154,7 @@ public class AccountResourceIntTest {
             null,                   // createdDate
             null,                   // lastModifiedBy
             null,
+            new Long(1),
             //MTC added SitUser props
             1,
             UserType.MANAGER,
@@ -190,6 +191,7 @@ public class AccountResourceIntTest {
             null,                   // createdDate
             null,                   // lastModifiedBy
             null,
+            new Long(1),
             //MTC added SitUser props
             1,
             UserType.MANAGER,
@@ -225,7 +227,9 @@ public class AccountResourceIntTest {
             null,               // createdBy
             null,               // createdDate
             null,               // lastModifiedBy
-            null ,       //MTC added SitUser props
+            null ,
+            new Long(1),
+            //MTC added SitUser props
             1,
             UserType.MANAGER,
             false,
@@ -260,7 +264,9 @@ public class AccountResourceIntTest {
             null,               // createdBy
             null,               // createdDate
             null,               // lastModifiedBy
-            null    ,       //MTC added SitUser props
+            null    ,
+            new Long(1),
+            //MTC added SitUser props
             1,
             UserType.MANAGER,
             false,
@@ -296,7 +302,8 @@ public class AccountResourceIntTest {
             null,                   // createdBy
             null,                   // createdDate
             null,                   // lastModifiedBy
-            null           ,       //MTC added SitUser props
+            null          ,
+            new Long(1),       //MTC added SitUser props
             1,
             UserType.MANAGER,
             false,
@@ -308,7 +315,7 @@ public class AccountResourceIntTest {
         // Duplicate login, different e-mail
         ManagedUserVM duplicatedUser = new ManagedUserVM(validUser.getId(), validUser.getLogin(), validUser.getPassword(), validUser.getLogin(), validUser.getLastName(),
             "alicejr@example.com", true, validUser.getLangKey(), validUser.getAuthorities(), validUser.getCreatedBy(),
-            validUser.getCreatedDate(), validUser.getLastModifiedBy(), validUser.getLastModifiedDate(),
+            validUser.getCreatedDate(), validUser.getLastModifiedBy(), validUser.getLastModifiedDate(), new Long(1),
             //MTC added SitUser props
             1,
             UserType.MANAGER,
@@ -352,7 +359,8 @@ public class AccountResourceIntTest {
             null,                   // createdBy
             null,                   // createdDate
             null,                   // lastModifiedBy
-            null        ,       //MTC added SitUser props
+            null        ,
+            new Long(1),     //MTC added SitUser props
             1,
             UserType.MANAGER,
             false,
@@ -364,7 +372,7 @@ public class AccountResourceIntTest {
         // Duplicate e-mail, different login
         ManagedUserVM duplicatedUser = new ManagedUserVM(validUser.getId(), "johnjr", validUser.getPassword(), validUser.getLogin(), validUser.getLastName(),
             validUser.getEmail(), true, validUser.getLangKey(), validUser.getAuthorities(), validUser.getCreatedBy(),
-            validUser.getCreatedDate(), validUser.getLastModifiedBy(), validUser.getLastModifiedDate(),
+            validUser.getCreatedDate(), validUser.getLastModifiedBy(), validUser.getLastModifiedDate(), validUser.getSitid(),
             //MTC added SitUser props
             1,
             UserType.MANAGER,
@@ -408,7 +416,8 @@ public class AccountResourceIntTest {
             null,                   // createdBy
             null,                   // createdDate
             null,                   // lastModifiedBy
-            null             ,       //MTC added SitUser props
+            null            ,
+            new Long(1),       //MTC added SitUser props
             1,
             UserType.MANAGER,
             false,
@@ -439,7 +448,8 @@ public class AccountResourceIntTest {
             "funky@example.com",    // e-mail
             true,                   // activated
             "en",                   // langKey
-            new HashSet<>(Arrays.asList(AuthoritiesConstants.USER))
+            new HashSet<>(Arrays.asList(AuthoritiesConstants.USER)),
+            new Long(1)
         );
 
         restUserMockMvc.perform(

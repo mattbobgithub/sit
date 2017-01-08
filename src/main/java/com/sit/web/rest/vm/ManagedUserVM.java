@@ -31,6 +31,7 @@ public class ManagedUserVM extends UserDTO {
     @Size(min = PASSWORD_MIN_LENGTH, max = PASSWORD_MAX_LENGTH)
     private String password;
 
+    private Long sitid;
 
     //add SitUser props
     private long companyId;
@@ -64,6 +65,8 @@ public class ManagedUserVM extends UserDTO {
         this.lastModifiedBy = user.getLastModifiedBy();
         this.lastModifiedDate = user.getLastModifiedDate();
         this.password = null;
+        this.sitid = user.getSitid();
+
 
         //now update sitUser props
         this.companyId = sitUserDTO.getCompanyId();
@@ -77,7 +80,7 @@ public class ManagedUserVM extends UserDTO {
     public ManagedUserVM(Long id, String login, String password, String firstName, String lastName,
                          String email, boolean activated, String langKey, Set<String> authorities,
                          String createdBy, ZonedDateTime createdDate, String lastModifiedBy,
-                         ZonedDateTime lastModifiedDate,
+                         ZonedDateTime lastModifiedDate, Long sitid,
                          //Added SitUser props
                          long companyId,
                          UserType userType,
@@ -85,13 +88,14 @@ public class ManagedUserVM extends UserDTO {
                          Integer managerApprovalCode,
                          long storeId,
                          long workroomId) {
-        super(login, firstName, lastName, email, activated, langKey, authorities);
+        super(login, firstName, lastName, email, activated, langKey, authorities, sitid);
         this.id = id;
         this.createdBy = createdBy;
         this.createdDate = createdDate;
         this.lastModifiedBy = lastModifiedBy;
         this.lastModifiedDate = lastModifiedDate;
         this.password = password;
+        this.sitid = sitid;
 
         //Added SitUser props
         this.companyId = companyId;
@@ -148,6 +152,11 @@ public class ManagedUserVM extends UserDTO {
     public String getPassword() {
         return password;
     }
+
+  //MTC added sitid from User obj
+    public Long getSitid() {return sitid;}
+    public void setSitid(Long sitid) { this.sitid = sitid; }
+
 
     //added SitUser Getters and Setters
     public UserType getUserType() {

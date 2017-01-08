@@ -41,5 +41,6 @@
     <include file="classpath:config/liquibase/changelog/20170102162238_added_entity_constraints_TicketAlteration.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20170102162239_added_entity_constraints_TicketAction.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20170102162241_added_entity_constraints_SitUser.xml" relativeToChangelogFile="false"/>
+
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
 </databaseChangeLog>

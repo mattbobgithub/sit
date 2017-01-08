@@ -1,5 +1,6 @@
 package com.sit.security;
 
+import com.sit.configHelper.TenantContext;
 import com.sit.domain.User;
 import com.sit.repository.master.UserRepository;
 import org.slf4j.Logger;
@@ -29,8 +30,9 @@ public class UserDetailsService implements org.springframework.security.core.use
     @Override
     @Transactional
     public UserDetails loadUserByUsername(final String login) {
-        log.debug("Authenticating {}", login);
+        log.debug("loadUserByUsername method -- Authenticating {}", login);
         String lowercaseLogin = login.toLowerCase(Locale.ENGLISH);
+        log.debug(" LOGGING IN USER " + login + " CURRENT TENANT USED TO GET USER OBJ from DB IS: " + TenantContext.getCurrentTenant());
         Optional<User> userFromDatabase = userRepository.findOneByLogin(lowercaseLogin);
         return userFromDatabase.map(user -> {
             if (!user.getActivated()) {

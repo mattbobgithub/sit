@@ -5,7 +5,7 @@ package com.sit.configHelper;
  */
 public class TenantContext {
 
-    final public static String DEFAULT_TENANT = "sit";
+    final public static String DEFAULT_TENANT = "sit1";
 
     private static ThreadLocal<String> currentTenant = new ThreadLocal<String>()
     {

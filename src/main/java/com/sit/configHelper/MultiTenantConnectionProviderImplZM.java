@@ -65,9 +65,9 @@ public class MultiTenantConnectionProviderImplZM extends AbstractDataSourceBased
 
         //don't get list of companies from database because that causes circular reference, just hardcode for now.
         final List<String> providerNames = new ArrayList<String>();
-        providerNames.add("sit");
         providerNames.add("sit1");
         providerNames.add("sit2");
+        providerNames.add("sit3");
 
         for (final String providerName : providerNames) {
             try {
