@@ -17,13 +17,16 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+import sun.rmi.runtime.Log;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import javax.sql.DataSource;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -61,13 +64,26 @@ public class MultiTenantConnectionProviderImplZM extends AbstractDataSourceBased
         map = new HashMap<>();
     }
 
-    public void init() {
-
-        //don't get list of companies from database because that causes circular reference, just hardcode for now.
+    public void init()  {
+LOGGER.debug("################ INIT of MultiTenantConnectionProviderZM -  RUNNING - CREATING MAP OF datasources");
+        //don't get list of companies from database because that causes circular reference,
+        // just hardcode db connection for now.
         final List<String> providerNames = new ArrayList<String>();
-        providerNames.add("sit1");
-        providerNames.add("sit2");
-        providerNames.add("sit3");
+      //  Statement stmt = null;
+        DataSource d = this.selectAnyDataSource();
+        try (Statement stmt = d.getConnection().createStatement()){
+
+            ResultSet rs = stmt.executeQuery("Select DISTINCT id from company");
+            while (rs.next()) {
+                long companyId = rs.getLong("id");
+                providerNames.add("sit" + companyId);
+                LOGGER.debug("adding to map: " + "sit" + companyId);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+        }
 
         for (final String providerName : providerNames) {
             try {

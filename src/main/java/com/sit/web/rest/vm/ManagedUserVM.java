@@ -34,12 +34,12 @@ public class ManagedUserVM extends UserDTO {
     private Long sitid;
 
     //add SitUser props
-    private long companyId;
+    private Long companyId;
     private UserType userType;
     private Boolean fitterIndicator;
     private Integer managerApprovalCode;
-    private long storeId;
-    private long workroomId;
+    private Long storeId;
+    private Long workroomId;
 
 
 
@@ -82,12 +82,12 @@ public class ManagedUserVM extends UserDTO {
                          String createdBy, ZonedDateTime createdDate, String lastModifiedBy,
                          ZonedDateTime lastModifiedDate, Long sitid,
                          //Added SitUser props
-                         long companyId,
+                         Long companyId,
                          UserType userType,
                          Boolean fitterIndicator,
                          Integer managerApprovalCode,
-                         long storeId,
-                         long workroomId) {
+                         Long storeId,
+                         Long workroomId) {
         super(login, firstName, lastName, email, activated, langKey, authorities, sitid);
         this.id = id;
         this.createdBy = createdBy;
@@ -215,6 +215,7 @@ public class ManagedUserVM extends UserDTO {
             ", createdDate=" + createdDate +
             ", lastModifiedBy='" + lastModifiedBy + '\'' +
             ", lastModifiedDate=" + lastModifiedDate +
+            ", companyId = " + companyId +
             "} " + super.toString();
     }
 }

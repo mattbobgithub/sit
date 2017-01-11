@@ -1,17 +1,16 @@
 package com.sit.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
-
 import com.sit.domain.User;
 import com.sit.repository.master.UserRepository;
 import com.sit.security.SecurityUtils;
 import com.sit.service.MailService;
+import com.sit.service.SitUserService;
 import com.sit.service.UserService;
 import com.sit.service.dto.UserDTO;
+import com.sit.web.rest.util.HeaderUtil;
 import com.sit.web.rest.vm.KeyAndPasswordVM;
 import com.sit.web.rest.vm.ManagedUserVM;
-import com.sit.web.rest.util.HeaderUtil;
-
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,7 +23,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-import java.util.*;
+import java.util.Optional;
 
 /**
  * REST controller for managing the current user's account.
@@ -44,6 +43,9 @@ public class AccountResource {
     @Inject
     private MailService mailService;
 
+    @Inject
+    private SitUserService sitUserService;
+
     /**
      * POST  /register : register the user.
      *
@@ -54,11 +56,18 @@ public class AccountResource {
                     produces={MediaType.APPLICATION_JSON_VALUE, MediaType.TEXT_PLAIN_VALUE})
     @Timed
     public ResponseEntity<?> registerAccount(@Valid @RequestBody ManagedUserVM managedUserVM) {
+        log.debug("############# registerAccount REST service reached with : " + managedUserVM.toString());
+        //MTC set sitid from companyId upon registering from form input.
+        // ...change to some type of URL routing property later
+        managedUserVM.setSitid(managedUserVM.getCompanyId());
+        //set default store and workroom
+        managedUserVM.setStoreId(new Long(1));
+        managedUserVM.setWorkroomId(new Long(1));
 
         HttpHeaders textPlainHeaders = new HttpHeaders();
         textPlainHeaders.setContentType(MediaType.TEXT_PLAIN);
 
-        return userRepository.findOneByLogin(managedUserVM.getLogin().toLowerCase())
+         ResponseEntity re =  userRepository.findOneByLogin(managedUserVM.getLogin().toLowerCase())
             .map(user -> new ResponseEntity<>("login already in use", textPlainHeaders, HttpStatus.BAD_REQUEST))
             .orElseGet(() -> userRepository.findOneByEmail(managedUserVM.getEmail())
                 .map(user -> new ResponseEntity<>("e-mail address already in use", textPlainHeaders, HttpStatus.BAD_REQUEST))
@@ -66,12 +75,19 @@ public class AccountResource {
                     User user = userService
                         .createUser(managedUserVM.getLogin(), managedUserVM.getPassword(),
                             managedUserVM.getFirstName(), managedUserVM.getLastName(),
-                            managedUserVM.getEmail().toLowerCase(), managedUserVM.getLangKey(), managedUserVM.getSitid());
+                            managedUserVM.getEmail().toLowerCase(), managedUserVM.getLangKey(),
+                            managedUserVM.getSitid());
 
                     mailService.sendActivationEmail(user);
                     return new ResponseEntity<>(HttpStatus.CREATED);
                 })
         );
+
+         //NEED TO UPDATE TENANT DB HERE
+
+        return re;
+
+
     }
 
     /**
@@ -131,7 +147,7 @@ public class AccountResource {
             .findOneByLogin(SecurityUtils.getCurrentUserLogin())
             .map(u -> {
                 userService.updateUser(userDTO.getFirstName(), userDTO.getLastName(), userDTO.getEmail(),
-                    userDTO.getLangKey());
+                    userDTO.getLangKey(), userDTO.getSitid());
                 return new ResponseEntity<String>(HttpStatus.OK);
             })
             .orElseGet(() -> new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR));

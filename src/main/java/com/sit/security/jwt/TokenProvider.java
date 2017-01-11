@@ -68,8 +68,7 @@ public class TokenProvider {
         }
         ///////////////////// BEGIN SET TENANTID IN JWT ////////////////////////////////////////
         String headerTenantId = "";
-        TenantContext.setCurrentTenant(TenantContext.DEFAULT_TENANT);
-        log.debug("creating JWT token with TENANT ID for user:" + authentication.getName());
+        log.debug("Double check tenant id by creating JWT token with sitid from tenant users table for user:" + authentication.getName());
         Optional<com.sit.domain.User> user = userRepository.findOneByLogin(authentication.getName());
         if(user.isPresent()){
             headerTenantId = "sit" + user.get().getSitid();

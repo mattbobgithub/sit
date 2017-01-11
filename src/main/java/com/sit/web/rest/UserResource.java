@@ -106,8 +106,6 @@ public class UserResource {
             SitUserDTO sitUserDTO = new SitUserDTO(managedUserVM);
             sitUserService.save(sitUserDTO);
 
-
-
             mailService.sendCreationEmail(newUser);
             return ResponseEntity.created(new URI("/api/users/" + newUser.getLogin()))
                 .headers(HeaderUtil.createAlert( "A user is created with identifier " + newUser.getLogin(), newUser.getLogin()))
@@ -136,12 +134,14 @@ public class UserResource {
         if (existingUser.isPresent() && (!existingUser.get().getId().equals(managedUserVM.getId()))) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("userManagement", "userexists", "Login already in use")).body(null);
         }
+        //MTC update SitUser object first, then user in both tenant and master dbs
+        SitUserDTO sitUserDTO = new SitUserDTO(managedUserVM);
+        sitUserDTO = sitUserService.save(sitUserDTO);
+
         userService.updateUser(managedUserVM.getId(), managedUserVM.getLogin(), managedUserVM.getFirstName(),
             managedUserVM.getLastName(), managedUserVM.getEmail(), managedUserVM.isActivated(),
             managedUserVM.getLangKey(), managedUserVM.getAuthorities(), managedUserVM.getSitid());
-        //MTC update SitUser object
-        SitUserDTO sitUserDTO = new SitUserDTO(managedUserVM);
-        sitUserDTO = sitUserService.save(sitUserDTO);
+
 
         return ResponseEntity.ok()
             .headers(HeaderUtil.createAlert("A user is updated with identifier " + managedUserVM.getLogin(), managedUserVM.getLogin()))

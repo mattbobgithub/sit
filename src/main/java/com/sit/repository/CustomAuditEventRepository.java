@@ -2,7 +2,9 @@ package com.sit.repository;
 
 import com.sit.config.audit.AuditEventConverter;
 import com.sit.domain.PersistentAuditEvent;
-
+import com.sit.security.UserDetailsService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.actuate.audit.AuditEvent;
 import org.springframework.boot.actuate.audit.AuditEventRepository;
 import org.springframework.stereotype.Repository;
@@ -25,6 +27,9 @@ public class CustomAuditEventRepository implements AuditEventRepository {
     private static final String AUTHORIZATION_FAILURE = "AUTHORIZATION_FAILURE";
 
     private static final String ANONYMOUS_USER = "anonymoususer";
+
+    private final Logger log = LoggerFactory.getLogger(UserDetailsService.class);
+
 
     @Inject
     private PersistenceAuditEventRepository persistenceAuditEventRepository;
@@ -63,6 +68,7 @@ public class CustomAuditEventRepository implements AuditEventRepository {
     @Override
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     public void add(AuditEvent event) {
+        log.debug("Audit event type: " + event.getType() );
         if (!AUTHORIZATION_FAILURE.equals(event.getType()) &&
             !ANONYMOUS_USER.equals(event.getPrincipal())) {
 

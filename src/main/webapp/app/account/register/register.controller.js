@@ -30,7 +30,7 @@
                 vm.error = null;
                 vm.errorUserExists = null;
                 vm.errorEmailExists = null;
-
+console.log(vm.registerAccount);
                 Auth.createAccount(vm.registerAccount).then(function () {
                     vm.success = 'OK';
                 }).catch(function (response) {

@@ -1,5 +1,6 @@
 package com.sit.service;
 
+import com.sit.configHelper.TenantContext;
 import com.sit.domain.Authority;
 import com.sit.domain.User;
 import com.sit.repository.master.AuthorityRepository;
@@ -105,13 +106,12 @@ public class UserService {
 
         //MTC add sitid
         newUser.setSitid(sitid);
-
         userRepository.save(newUser);
-        log.debug("Created Information for User: {}", newUser);
         return newUser;
     }
 
     public User createUser(ManagedUserVM managedUserVM) {
+        log.debug("creating user - " + managedUserVM.getLogin());
         User user = new User();
         user.setLogin(managedUserVM.getLogin());
         user.setFirstName(managedUserVM.getFirstName());
@@ -138,19 +138,22 @@ public class UserService {
         user.setSitid(managedUserVM.getSitid());
 
         userRepository.save(user);
-        log.debug("Created Information for User: {}", user);
+        log.debug("Created Information for User: {}", user.getLogin() +  " in tenant of:" + TenantContext.getCurrentTenant());
+
         return user;
     }
 
-    public void updateUser(String firstName, String lastName, String email, String langKey) {
+    public void updateUser(String firstName, String lastName, String email, String langKey, Long sitid) {
         userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin()).ifPresent(user -> {
             user.setFirstName(firstName);
             user.setLastName(lastName);
             user.setEmail(email);
             user.setLangKey(langKey);
+            user.setSitid(sitid);
             log.debug("Changed Information for User: {}", user);
         });
-    }
+
+ }
 
     public void updateUser(Long id, String login, String firstName, String lastName, String email,
         boolean activated, String langKey, Set<String> authorities, Long sitid) {
@@ -174,15 +177,17 @@ public class UserService {
 
                 log.debug("Changed Information for User: {}", user);
             });
-    }
+
+ }
 
     public void deleteUser(String login) {
+
         userRepository.findOneByLogin(login).ifPresent(user -> {
             userRepository.delete(user);
-            // MTC - added delete SitUser
-            sitUserRepository.delete(user.getId());
-            log.debug("Deleted User: {}", user);
+            log.debug("Deleted User in tenant db: {}", user);
         });
+
+
     }
 
     public void changePassword(String password) {
@@ -233,8 +238,7 @@ public class UserService {
         for (User user : users) {
             log.debug("Deleting not activated user {}", user.getLogin());
             userRepository.delete(user);
-            // MTC - added delete SitUser
-            sitUserRepository.delete(user.getId());
+
         }
     }
 }

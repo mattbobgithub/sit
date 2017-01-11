@@ -156,12 +156,12 @@ public class AccountResourceIntTest {
             null,
             new Long(1),
             //MTC added SitUser props
-            1,
+            new Long(1),
             UserType.MANAGER,
             false,
             1,
-            1,
-            1                    // lastModifiedDate
+            new Long(1),
+            new Long(1)                    // lastModifiedDate
         );
 
         restMvc.perform(
@@ -193,12 +193,12 @@ public class AccountResourceIntTest {
             null,
             new Long(1),
             //MTC added SitUser props
-            1,
+            new Long(1),
             UserType.MANAGER,
             false,
             1,
-            1,
-            1  // lastModifiedDate
+            new Long(1),
+            new Long(1)  // lastModifiedDate
         );
 
         restUserMockMvc.perform(
@@ -230,12 +230,12 @@ public class AccountResourceIntTest {
             null ,
             new Long(1),
             //MTC added SitUser props
-            1,
+            new Long(1),
             UserType.MANAGER,
             false,
             1,
-            1,
-            1                 // lastModifiedDate
+            new Long(1),
+            new Long(1)                 // lastModifiedDate
         );
 
         restUserMockMvc.perform(
@@ -267,12 +267,12 @@ public class AccountResourceIntTest {
             null    ,
             new Long(1),
             //MTC added SitUser props
-            1,
+            new Long(1),
             UserType.MANAGER,
             false,
             1,
-            1,
-            1              // lastModifiedDate
+            new Long(1),
+            new Long(1)              // lastModifiedDate
         );
 
         restUserMockMvc.perform(
@@ -304,12 +304,12 @@ public class AccountResourceIntTest {
             null,                   // lastModifiedBy
             null          ,
             new Long(1),       //MTC added SitUser props
-            1,
+            new Long(1),
             UserType.MANAGER,
             false,
             1,
-            1,
-            1           // lastModifiedDate
+            new Long(1),
+            new Long(1)           // lastModifiedDate
         );
 
         // Duplicate login, different e-mail
@@ -317,12 +317,12 @@ public class AccountResourceIntTest {
             "alicejr@example.com", true, validUser.getLangKey(), validUser.getAuthorities(), validUser.getCreatedBy(),
             validUser.getCreatedDate(), validUser.getLastModifiedBy(), validUser.getLastModifiedDate(), new Long(1),
             //MTC added SitUser props
-            1,
+            new Long(1),
             UserType.MANAGER,
             false,
             1,
-            1,
-            1  );
+            new Long(1),
+            new Long(1)  );
 
         // Good user
         restMvc.perform(
@@ -361,12 +361,12 @@ public class AccountResourceIntTest {
             null,                   // lastModifiedBy
             null        ,
             new Long(1),     //MTC added SitUser props
-            1,
+            new Long(1),
             UserType.MANAGER,
             false,
             1,
-            1,
-            1             // lastModifiedDate
+            new Long(1),
+            new Long(1)             // lastModifiedDate
         );
 
         // Duplicate e-mail, different login
@@ -374,12 +374,12 @@ public class AccountResourceIntTest {
             validUser.getEmail(), true, validUser.getLangKey(), validUser.getAuthorities(), validUser.getCreatedBy(),
             validUser.getCreatedDate(), validUser.getLastModifiedBy(), validUser.getLastModifiedDate(), validUser.getSitid(),
             //MTC added SitUser props
-            1,
+            new Long(1),
             UserType.MANAGER,
             false,
             1,
-            1,
-            1
+            new Long(1),
+            new Long(1)
         );
 
         // Good user
@@ -418,12 +418,12 @@ public class AccountResourceIntTest {
             null,                   // lastModifiedBy
             null            ,
             new Long(1),       //MTC added SitUser props
-            1,
+            new Long(1),
             UserType.MANAGER,
             false,
             1,
-            1,
-            1         // lastModifiedDate
+            new Long(1),
+            new Long(1)        // lastModifiedDate
         );
 
         restMvc.perform(
