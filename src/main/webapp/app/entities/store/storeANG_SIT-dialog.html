@@ -46,7 +46,7 @@
 
         <div class="form-group">
             <label for="field_workroom">Workroom</label>
-            <select class="form-control" id="field_workroom" name="workroom" ng-model="vm.store.workroomId" ng-options="workroom.id as workroom.id for workroom in vm.workrooms"            >
+            <select class="form-control" id="field_workroom" name="workroom" ng-model="vm.store.workroomId" ng-options="workroom.id as workroom.description for workroom in vm.workrooms"            >
                 <option value=""></option>
             </select>
         </div>

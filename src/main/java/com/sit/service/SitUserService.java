@@ -81,4 +81,13 @@ public class SitUserService {
         log.debug("Request to delete SitUser : {}", id);
         sitUserRepository.delete(id);
     }
+
+//MTC added method to get by username
+
+    @Transactional(readOnly = true)
+    public SitUser getByUsername(String username) {
+        log.debug("Request to get SitUser : {}", username);
+        SitUser sitUser = sitUserRepository.findByUsername(username);
+        return sitUser;
+    }
 }

@@ -22,6 +22,8 @@
         vm.workrooms = Workroom.query();
         vm.users = User.query();
 
+        console.log(vm);
+
 
 
         function clear () {

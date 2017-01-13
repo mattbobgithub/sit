@@ -2,6 +2,7 @@ package com.sit.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.sit.config.Constants;
+import com.sit.domain.SitUser;
 import com.sit.domain.User;
 import com.sit.repository.master.UserRepository;
 import com.sit.security.AuthoritiesConstants;
@@ -219,6 +220,18 @@ public class UserResource {
         return ResponseEntity.ok().headers(HeaderUtil.createAlert( "A user is deleted with identifier " + login, login)).build();
     }
 
+
+
+
+    @GetMapping("/sitUserDetails/{username:" + Constants.LOGIN_REGEX + "}")
+    @Timed
+    public ResponseEntity<SitUser> getSitUserDetails(@PathVariable String username) {
+        log.debug("REST request to get User : {}", username);
+        SitUser su = sitUserService.getByUsername(username);
+
+            return new ResponseEntity<>(su, HttpStatus.OK);
+
+    }
 
 
     private ManagedUserVM updateManagedUserVMWithSitUser(ManagedUserVM muvm){

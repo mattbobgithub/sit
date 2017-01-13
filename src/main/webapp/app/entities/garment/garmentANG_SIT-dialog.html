@@ -37,7 +37,8 @@
 
         <div class="form-group">
             <label for="field_sizeType">Size Type</label>
-            <select class="form-control" id="field_sizeType" name="sizeType" ng-model="vm.garment.sizeTypeId" ng-options="sizeType.id as sizeType.id for sizeType in vm.sizetypes"            >
+            <select class="form-control" id="field_sizeType" name="sizeType" ng-model="vm.garment.sizeTypeId"
+                    ng-options="sizeType.id as sizeType.description for sizeType in vm.sizetypes"            >
                 <option value=""></option>
             </select>
         </div>

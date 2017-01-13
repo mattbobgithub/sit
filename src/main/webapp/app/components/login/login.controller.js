@@ -5,9 +5,9 @@
         .module('sitApp')
         .controller('LoginController', LoginController);
 
-    LoginController.$inject = ['$rootScope', '$state', '$timeout', 'Auth', '$uibModalInstance'];
+    LoginController.$inject = ['$rootScope', '$state', '$timeout', 'Auth', '$uibModalInstance', 'User'];
 
-    function LoginController ($rootScope, $state, $timeout, Auth, $uibModalInstance) {
+    function LoginController ($rootScope, $state, $timeout, Auth, $uibModalInstance, User) {
         var vm = this;
 
         vm.authenticationError = false;
@@ -41,6 +41,14 @@
             }).then(function () {
                 vm.authenticationError = false;
                 $uibModalInstance.close();
+                //user successfully logged in, now update navbar with company/store/workroom
+                User.getSitUserDetails({username:vm.username}, function(result){
+                    $rootScope.companyTitleName = result.company.description;
+                    $rootScope.storeTitleName = result.store.description;
+                    $rootScope.workroomTitleName = result.workroom.description;
+                });
+
+
                 if ($state.current.name === 'register' || $state.current.name === 'activate' ||
                     $state.current.name === 'finishReset' || $state.current.name === 'requestReset') {
                     $state.go('home');

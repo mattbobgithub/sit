@@ -45,12 +45,13 @@ public class UserJWTController {
     @PostMapping("/authenticate")
     @Timed
     public ResponseEntity<?> authorize(@Valid @RequestBody LoginVM loginVM, HttpServletRequest request, HttpServletResponse response) {
-     log.debug("authorize Method in UserJWTController. Login vm is:" + loginVM.toString());
-       StringBuffer strUrl = request.getRequestURL();
-       log.debug("full url:" + strUrl);
-         String subDomainString = strUrl.substring(strUrl.indexOf("/")+2,strUrl.indexOf("."));
+        log.debug("authorize Method in UserJWTController. Login vm is:" + loginVM.toString());
+        StringBuffer strUrl = request.getRequestURL();
+        log.debug("full url:" + strUrl);
+        String subDomainString = strUrl.substring(strUrl.indexOf("/")+2,strUrl.indexOf("."));
         log.debug("subDomainString:" + subDomainString);
-       HashMap<String, String> allSitClientsFromXML =  sitClients.getClients();
+
+        HashMap<String, String> allSitClientsFromXML =  sitClients.getClients();
         log.debug("all sit clients from xml:" + sitClients.getClients().toString());
 
         String tenantId = sitClients.getClients().get(subDomainString);

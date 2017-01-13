@@ -18,6 +18,7 @@
             vm.swaggerEnabled = response.swaggerEnabled;
         });
 
+
         vm.login = login;
         vm.logout = logout;
         vm.toggleNavbar = toggleNavbar;

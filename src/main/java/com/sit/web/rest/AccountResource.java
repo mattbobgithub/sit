@@ -83,7 +83,6 @@ public class AccountResource {
                 })
         );
 
-         //NEED TO UPDATE TENANT DB HERE
 
         return re;
 
@@ -127,8 +126,19 @@ public class AccountResource {
     public ResponseEntity<UserDTO> getAccount() {
         return Optional.ofNullable(userService.getUserWithAuthorities())
             .map(user -> new ResponseEntity<>(new UserDTO(user), HttpStatus.OK))
-            .orElse(new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR));
+           .orElse(new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR));
+
     }
+
+    @GetMapping("/accountNavDetails")
+    @Timed
+    public ResponseEntity<UserDTO> getAccountNavDetails() {
+        return Optional.ofNullable(userService.getUserWithAuthorities())
+            .map(user -> new ResponseEntity<>(new UserDTO(user), HttpStatus.OK))
+            .orElse(new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR));
+
+    }
+
 
     /**
      * POST  /account : update the current user information.
@@ -139,6 +149,7 @@ public class AccountResource {
     @PostMapping("/account")
     @Timed
     public ResponseEntity<String> saveAccount(@Valid @RequestBody UserDTO userDTO) {
+        log.debug("saveAccount rest service reached");
         Optional<User> existingUser = userRepository.findOneByEmail(userDTO.getEmail());
         if (existingUser.isPresent() && (!existingUser.get().getLogin().equalsIgnoreCase(userDTO.getLogin()))) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("user-management", "emailexists", "Email already in use")).body(null);

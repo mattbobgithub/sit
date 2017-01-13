@@ -40,25 +40,25 @@
 
         <div class="form-group">
             <label for="field_garmentSize">Garment Size</label>
-            <select class="form-control" id="field_garmentSize" name="garmentSize" ng-model="vm.sku.garmentSizeId" ng-options="garmentSize.id as garmentSize.id for garmentSize in vm.garmentsizes"            >
+            <select class="form-control" id="field_garmentSize" name="garmentSize" ng-model="vm.sku.garmentSizeId" ng-options="garmentSize.id as garmentSize.description for garmentSize in vm.garmentsizes"            >
                 <option value=""></option>
             </select>
         </div>
         <div class="form-group">
             <label for="field_garment">Garment</label>
-            <select class="form-control" id="field_garment" name="garment" ng-model="vm.sku.garmentId" ng-options="garment.id as garment.id for garment in vm.garments"            >
+            <select class="form-control" id="field_garment" name="garment" ng-model="vm.sku.garmentId" ng-options="garment.id as garment.description for garment in vm.garments"            >
                 <option value=""></option>
             </select>
         </div>
         <div class="form-group">
             <label for="field_sizeType">Size Type</label>
-            <select class="form-control" id="field_sizeType" name="sizeType" ng-model="vm.sku.sizeTypeId" ng-options="sizeType.id as sizeType.id for sizeType in vm.sizetypes"            >
+            <select class="form-control" id="field_sizeType" name="sizeType" ng-model="vm.sku.sizeTypeId" ng-options="sizeType.id as sizeType.description for sizeType in vm.sizetypes"            >
                 <option value=""></option>
             </select>
         </div>
         <div class="form-group">
             <label for="field_color">Color</label>
-            <select class="form-control" id="field_color" name="color" ng-model="vm.sku.colorId" ng-options="color.id as color.id for color in vm.colors"            >
+            <select class="form-control" id="field_color" name="color" ng-model="vm.sku.colorId" ng-options="color.id as color.description for color in vm.colors"            >
                 <option value=""></option>
             </select>
         </div>
