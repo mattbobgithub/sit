@@ -27,11 +27,11 @@
             <column name="description" type="varchar(255)">
                 <constraints nullable="false" />
             </column>
-            
+
             <column name="phone" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            
+
             <column name="central_workroom_indicator" type="bit">
                 <constraints nullable="true" />
             </column>
@@ -40,6 +40,10 @@
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
-        
+        <loadData encoding="UTF-8"
+                  file="config/liquibase/workrooms.csv"
+                  separator=";"
+                  tableName="workroom">
+        </loadData>
     </changeSet>
 </databaseChangeLog>

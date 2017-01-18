@@ -7,6 +7,7 @@ import com.sit.security.SecurityUtils;
 import com.sit.service.MailService;
 import com.sit.service.SitUserService;
 import com.sit.service.UserService;
+import com.sit.service.dto.SitUserDTO;
 import com.sit.service.dto.UserDTO;
 import com.sit.web.rest.util.HeaderUtil;
 import com.sit.web.rest.vm.KeyAndPasswordVM;
@@ -121,12 +122,29 @@ public class AccountResource {
      *
      * @return the ResponseEntity with status 200 (OK) and the current user in body, or status 500 (Internal Server Error) if the user couldn't be returned
      */
+//    @GetMapping("/account")
+//    @Timed
+//    public ResponseEntity<UserDTO> getAccount() {
+//        return Optional.ofNullable(userService.getUserWithAuthorities())
+//            .map(user -> new ResponseEntity<>(new UserDTO(user), HttpStatus.OK))
+//           .orElse(new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR));
+//
+//    }
+
+    // MTC try to return manageduservm instead of UserDTO
     @GetMapping("/account")
     @Timed
-    public ResponseEntity<UserDTO> getAccount() {
-        return Optional.ofNullable(userService.getUserWithAuthorities())
-            .map(user -> new ResponseEntity<>(new UserDTO(user), HttpStatus.OK))
-           .orElse(new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR));
+    public ResponseEntity<ManagedUserVM> getAccount() {
+
+        User userObj = userService.getUserWithAuthorities();
+        if (userObj!= null){
+            //get sitUserDTO to create ManagedUserEntity
+            SitUserDTO sitUserDTO = sitUserService.findOne(userObj.getId());
+            return new ResponseEntity<>(new ManagedUserVM(userObj,sitUserDTO),HttpStatus.OK);
+        }else
+        {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
 
     }
 
@@ -162,6 +180,7 @@ public class AccountResource {
                 return new ResponseEntity<String>(HttpStatus.OK);
             })
             .orElseGet(() -> new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR));
+
     }
 
     /**

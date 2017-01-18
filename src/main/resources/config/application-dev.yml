@@ -69,7 +69,6 @@ sitprops:
         clients:
             demo1: sit1
             demo2: sit2
-            demo3: sit3
 
 # ===================================================================
 # JHipster specific properties

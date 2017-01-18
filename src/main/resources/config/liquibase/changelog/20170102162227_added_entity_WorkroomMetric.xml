@@ -27,17 +27,21 @@
             <column name="default_fitting_time_mins" type="integer">
                 <constraints nullable="true" />
             </column>
-            
+
             <column name="efficiency_percentage" type="double">
                 <constraints nullable="true" />
             </column>
-            
+
             <column name="utilization_percentage" type="double">
                 <constraints nullable="true" />
             </column>
-            
+
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
-        
+        <loadData encoding="UTF-8"
+                  file="config/liquibase/workroomMetrics.csv"
+                  separator=";"
+                  tableName="workroom_metric">
+        </loadData>
     </changeSet>
 </databaseChangeLog>

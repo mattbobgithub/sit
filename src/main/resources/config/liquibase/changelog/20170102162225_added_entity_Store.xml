@@ -27,25 +27,29 @@
             <column name="description" type="varchar(255)">
                 <constraints nullable="false" />
             </column>
-            
+
             <column name="phone" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            
+
             <column name="default_promise_days" type="integer">
                 <constraints nullable="true" />
             </column>
-            
+
             <column name="default_price_category_id" type="bigint">
                 <constraints nullable="true" />
             </column>
-            
+
             <column name="workroom_id" type="bigint">
                 <constraints nullable="true" />
             </column>
 
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
-        
+        <loadData encoding="UTF-8"
+                  file="config/liquibase/stores.csv"
+                  separator=";"
+                  tableName="store">
+        </loadData>
     </changeSet>
 </databaseChangeLog>

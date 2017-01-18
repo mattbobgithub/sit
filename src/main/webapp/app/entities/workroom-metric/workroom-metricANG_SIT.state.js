@@ -13,7 +13,7 @@
             parent: 'entity',
             url: '/workroom-metricANG_SIT',
             data: {
-                authorities: ['ROLE_USER'],
+                authorities: ['ROLE_MANAGER', 'ROLE_ADMIN'],
                 pageTitle: 'WorkroomMetrics'
             },
             views: {

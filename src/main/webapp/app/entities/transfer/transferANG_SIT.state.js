@@ -13,7 +13,7 @@
             parent: 'entity',
             url: '/transferANG_SIT',
             data: {
-                authorities: ['ROLE_USER'],
+                authorities: ['ROLE_ADMIN', 'ROLE_MANAGER', 'ROLE_USER'],
                 pageTitle: 'Transfers'
             },
             views: {

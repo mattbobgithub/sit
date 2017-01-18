@@ -13,7 +13,7 @@
             parent: 'entity',
             url: '/ticketANG_SIT',
             data: {
-                authorities: ['ROLE_USER'],
+                authorities: ['ROLE_ADMIN', 'ROLE_MANAGER', 'ROLE_USER'],
                 pageTitle: 'Tickets'
             },
             views: {

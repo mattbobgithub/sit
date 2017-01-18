@@ -13,7 +13,7 @@
             parent: 'entity',
             url: '/alteration-display-typeANG_SIT',
             data: {
-                authorities: ['ROLE_USER'],
+                authorities: ['ROLE_ADMIN', 'ROLE_MANAGER'],
                 pageTitle: 'AlterationDisplayTypes'
             },
             views: {

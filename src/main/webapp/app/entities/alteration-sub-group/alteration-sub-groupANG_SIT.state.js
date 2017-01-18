@@ -13,7 +13,7 @@
             parent: 'entity',
             url: '/alteration-sub-groupANG_SIT',
             data: {
-                authorities: ['ROLE_USER'],
+                authorities: ['ROLE_ADMIN', 'ROLE_MANAGER'],
                 pageTitle: 'AlterationSubGroups'
             },
             views: {
