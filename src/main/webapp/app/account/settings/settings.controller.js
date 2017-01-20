@@ -29,8 +29,9 @@
                 langKey: account.langKey,
                 lastName: account.lastName,
                 login: account.login,
+                sitid: null,
                 //now add sitUser details to account
-                companyId: account.companyId,
+                companyId: null,
                 workroomId: account.workroomId,
                 storeId: account.storeId,
                 fitterIndicator: account.fitterIndicator,

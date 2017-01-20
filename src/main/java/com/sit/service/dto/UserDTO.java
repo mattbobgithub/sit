@@ -3,6 +3,7 @@ package com.sit.service.dto;
 import com.sit.config.Constants;
 import com.sit.domain.Authority;
 import com.sit.domain.User;
+import com.sit.web.rest.vm.ManagedUserVM;
 import org.hibernate.validator.constraints.Email;
 
 import javax.validation.constraints.Pattern;
@@ -61,6 +62,17 @@ public class UserDTO {
         this.langKey = langKey;
         this.authorities = authorities;
         this.sitid = sitid;
+    }
+
+    public UserDTO(ManagedUserVM managedUserVM){
+        this.login = managedUserVM.getLogin();
+        this.firstName = managedUserVM.getFirstName();
+        this.lastName = managedUserVM.getLastName();
+        this.email = managedUserVM.getEmail();
+        this.activated = managedUserVM.isActivated();
+        this.langKey = managedUserVM.getLangKey();
+        this.authorities = managedUserVM.getAuthorities();
+        this.sitid = managedUserVM.getSitid();
     }
 
     public String getLogin() {

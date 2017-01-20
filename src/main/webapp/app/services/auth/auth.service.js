@@ -129,6 +129,10 @@
         function logout () {
             AuthServerProvider.logout();
             Principal.authenticate(null);
+            // MTC - blank navbar titles
+            $rootScope.companyTitleName = null;
+            $rootScope.storeTitleName = null;
+            $rootScope.workroomTitleName = null;
         }
 
         function resetPasswordFinish (keyAndPassword, callback) {

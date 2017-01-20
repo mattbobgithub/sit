@@ -4,11 +4,11 @@ import com.codahale.metrics.annotation.Timed;
 import com.sit.domain.User;
 import com.sit.repository.master.UserRepository;
 import com.sit.security.SecurityUtils;
+import com.sit.service.CompanyService;
 import com.sit.service.MailService;
 import com.sit.service.SitUserService;
 import com.sit.service.UserService;
 import com.sit.service.dto.SitUserDTO;
-import com.sit.service.dto.UserDTO;
 import com.sit.web.rest.util.HeaderUtil;
 import com.sit.web.rest.vm.KeyAndPasswordVM;
 import com.sit.web.rest.vm.ManagedUserVM;
@@ -47,6 +47,9 @@ public class AccountResource {
     @Inject
     private SitUserService sitUserService;
 
+    @Inject
+    private CompanyService companyService;
+
     /**
      * POST  /register : register the user.
      *
@@ -60,7 +63,10 @@ public class AccountResource {
         log.debug("############# registerAccount REST service reached with : " + managedUserVM.toString());
         //MTC set sitid from companyId upon registering from form input.
         // ...change to some type of URL routing property later
-        managedUserVM.setSitid(managedUserVM.getCompanyId());
+        Long defaultCompanyIdForTenant = companyService.findAll().get(0).getId();
+        managedUserVM.setSitid(defaultCompanyIdForTenant);
+        managedUserVM.setCompanyId(defaultCompanyIdForTenant);
+        log.debug(" register account default company and sitid set to:" + defaultCompanyIdForTenant);
         //set default store and workroom
         managedUserVM.setStoreId(new Long(1));
         managedUserVM.setWorkroomId(new Long(1));
@@ -74,15 +80,25 @@ public class AccountResource {
                 .map(user -> new ResponseEntity<>("e-mail address already in use", textPlainHeaders, HttpStatus.BAD_REQUEST))
                 .orElseGet(() -> {
                     User user = userService
-                        .createUser(managedUserVM.getLogin(), managedUserVM.getPassword(),
-                            managedUserVM.getFirstName(), managedUserVM.getLastName(),
-                            managedUserVM.getEmail().toLowerCase(), managedUserVM.getLangKey(),
-                            managedUserVM.getSitid());
+                        // MTC change to different method
+//                        .createUser(managedUserVM.getLogin(), managedUserVM.getPassword(),
+//                            managedUserVM.getFirstName(), managedUserVM.getLastName(),
+//                            managedUserVM.getEmail().toLowerCase(), managedUserVM.getLangKey(),
+//                            managedUserVM.getSitid());
+                    .createUser(managedUserVM);
 
-                    mailService.sendActivationEmail(user);
+                    SitUserDTO sitUserDTO = new SitUserDTO(managedUserVM);
+                    sitUserService.save(sitUserDTO);
+
+                    // MTC - don't use activation
+                    // mailService.sendActivationEmail(user);
                     return new ResponseEntity<>(HttpStatus.CREATED);
                 })
+
+
         );
+
+
 
 
         return re;
@@ -135,12 +151,19 @@ public class AccountResource {
     @GetMapping("/account")
     @Timed
     public ResponseEntity<ManagedUserVM> getAccount() {
-
+        log.debug("!!! getAccount service reached");
+        //get currently logged in user
         User userObj = userService.getUserWithAuthorities();
         if (userObj!= null){
             //get sitUserDTO to create ManagedUserEntity
             SitUserDTO sitUserDTO = sitUserService.findOne(userObj.getId());
-            return new ResponseEntity<>(new ManagedUserVM(userObj,sitUserDTO),HttpStatus.OK);
+            ManagedUserVM muvm = new ManagedUserVM(userObj,sitUserDTO);
+            //null these fields when sending to client, post will re-assign
+            muvm.setId(null);
+            muvm.setCompanyId(null);
+            muvm.setSitid(null);
+            log.debug("getting muvm from getAccount (id,companyid, and sitid hardcoded to null for client side current logged in user) :" + muvm.toString());
+            return new ResponseEntity<>(muvm,HttpStatus.OK);
         }else
         {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -148,38 +171,86 @@ public class AccountResource {
 
     }
 
-    @GetMapping("/accountNavDetails")
-    @Timed
-    public ResponseEntity<UserDTO> getAccountNavDetails() {
-        return Optional.ofNullable(userService.getUserWithAuthorities())
-            .map(user -> new ResponseEntity<>(new UserDTO(user), HttpStatus.OK))
-            .orElse(new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR));
+//    @GetMapping("/accountNavDetails")
+//    @Timed
+//    public ResponseEntity<UserDTO> getAccountNavDetails() {
+//        return Optional.ofNullable(userService.getUserWithAuthorities())
+//            .map(user -> new ResponseEntity<>(new UserDTO(user), HttpStatus.OK))
+//            .orElse(new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR));
+//
+//    }
 
-    }
 
 
-    /**
-     * POST  /account : update the current user information.
-     *
-     * @param userDTO the current user information
-     * @return the ResponseEntity with status 200 (OK), or status 400 (Bad Request) or 500 (Internal Server Error) if the user couldn't be updated
-     */
+//    @PostMapping("/account")
+//    @Timed
+//    public ResponseEntity<String> saveAccount(@Valid @RequestBody UserDTO userDTO) {
+//        log.debug("saveAccount rest service reached");
+//
+//        Optional<User> existingUser = userRepository.findOneByEmail(userDTO.getEmail());
+//        if (existingUser.isPresent() && (!existingUser.get().getLogin().equalsIgnoreCase(userDTO.getLogin()))) {
+//            return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("user-management", "emailexists", "Email already in use")).body(null);
+//        }
+//        return userRepository
+//            .findOneByLogin(SecurityUtils.getCurrentUserLogin())
+//            .map(u -> {
+//                userService.updateUser(userDTO.getFirstName(), userDTO.getLastName(), userDTO.getEmail(),
+//                    userDTO.getLangKey(), userDTO.getSitid());
+//                return new ResponseEntity<String>(HttpStatus.OK);
+//            })
+//            .orElseGet(() -> new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR));
+//
+//    }
+
+//MTC - UPDATED to use MANAGED USER VM instead of USERDTO
     @PostMapping("/account")
     @Timed
-    public ResponseEntity<String> saveAccount(@Valid @RequestBody UserDTO userDTO) {
+    public ResponseEntity<String> saveAccount(@Valid @RequestBody ManagedUserVM muvm) {
         log.debug("saveAccount rest service reached");
-        Optional<User> existingUser = userRepository.findOneByEmail(userDTO.getEmail());
-        if (existingUser.isPresent() && (!existingUser.get().getLogin().equalsIgnoreCase(userDTO.getLogin()))) {
+        Long defaultCompanyIdForTenant = companyService.findAll().get(0).getId();
+        muvm.setSitid(defaultCompanyIdForTenant);
+        muvm.setCompanyId(defaultCompanyIdForTenant);
+        log.debug(" register account default company and sitid set to:" + defaultCompanyIdForTenant);
+        //check if exists
+        Optional<User> existingUser = userRepository.findOneByEmail(muvm.getEmail());
+        if (existingUser.isPresent() && (!existingUser.get().getLogin().equalsIgnoreCase(muvm.getLogin()))) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("user-management", "emailexists", "Email already in use")).body(null);
         }
-        return userRepository
-            .findOneByLogin(SecurityUtils.getCurrentUserLogin())
-            .map(u -> {
-                userService.updateUser(userDTO.getFirstName(), userDTO.getLastName(), userDTO.getEmail(),
-                    userDTO.getLangKey(), userDTO.getSitid());
-                return new ResponseEntity<String>(HttpStatus.OK);
-            })
-            .orElseGet(() -> new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR));
+
+
+        try {
+            Optional<User> usr = userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin());
+            muvm.setId(usr.get().getId());
+
+            userService.updateUser(
+                muvm.getId(),
+                muvm.getLogin(),
+                muvm.getFirstName(),
+                muvm.getLastName(),
+                muvm.getEmail(),
+                muvm.isActivated(),
+                muvm.getLangKey(),
+                userService.getAuthoritiesStringsFromUserType(muvm.getUserType()),
+                muvm.getSitid()
+            );
+
+            //MTC now update sitUser
+            SitUserDTO sitUserDTO = new SitUserDTO(muvm);
+            sitUserDTO = sitUserService.save(sitUserDTO);
+
+            return new ResponseEntity<String>(HttpStatus.OK);
+        } catch (Exception e){
+       return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+        //now update user
+//        return userRepository
+//            .findOneByLogin(SecurityUtils.getCurrentUserLogin())
+//            .map(u -> {
+//                userService.updateUser(muvm.getFirstName(), muvm.getLastName(), muvm.getEmail(),
+//                    muvm.getLangKey(), muvm.getSitid());
+//                return new ResponseEntity<String>(HttpStatus.OK);
+//            })
+//            .orElseGet(() -> new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR));
 
     }
 

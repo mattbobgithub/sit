@@ -3,6 +3,7 @@ package com.sit.service;
 import com.sit.configHelper.TenantContext;
 import com.sit.domain.Authority;
 import com.sit.domain.User;
+import com.sit.domain.enumeration.UserType;
 import com.sit.repository.master.AuthorityRepository;
 import com.sit.repository.master.SitUserRepository;
 import com.sit.repository.master.UserRepository;
@@ -98,9 +99,9 @@ public class UserService {
         newUser.setEmail(email);
         newUser.setLangKey(langKey);
         // new user is not active
-        newUser.setActivated(false);
+        newUser.setActivated(true);
         // new user gets registration key
-        newUser.setActivationKey(RandomUtil.generateActivationKey());
+      //  newUser.setActivationKey(RandomUtil.generateActivationKey());
         authorities.add(authority);
         newUser.setAuthorities(authorities);
 
@@ -122,13 +123,17 @@ public class UserService {
         } else {
             user.setLangKey(managedUserVM.getLangKey());
         }
-        if (managedUserVM.getAuthorities() != null) {
-            Set<Authority> authorities = new HashSet<>();
-            managedUserVM.getAuthorities().forEach(
-                authority -> authorities.add(authorityRepository.findOne(authority))
-            );
-            user.setAuthorities(authorities);
-        }
+
+//        if (managedUserVM.getAuthorities() != null) {
+//            Set<Authority> authorities = new HashSet<>();
+//            managedUserVM.getAuthorities().forEach(
+//                authority -> authorities.add(authorityRepository.findOne(authority))
+//            );
+//            user.setAuthorities(authorities);
+//        }
+    //MTC - set user authorities based on Usertype from muvm
+        user.setAuthorities(this.getAuthoritiesFromUserType(managedUserVM.getUserType()));
+
         String encryptedPassword = passwordEncoder.encode(RandomUtil.generatePassword());
         user.setPassword(encryptedPassword);
         user.setResetKey(RandomUtil.generateResetKey());
@@ -241,4 +246,48 @@ public class UserService {
 
         }
     }
+
+
+    //MTC - added method to get roles from usertype
+    public Set<String> getAuthoritiesStringsFromUserType(UserType userType){
+        Set<String> updatedUserAuthorities = new HashSet<>();
+        switch(userType){
+            case ADMIN:
+                updatedUserAuthorities.add("ROLE_ADMIN");
+                updatedUserAuthorities.add("ROLE_USER");
+                break;
+            case MANAGER:
+                updatedUserAuthorities.add("ROLE_MANAGER");
+                updatedUserAuthorities.add("ROLE_USER");
+                break;
+            case SALES:
+            case SHIPPING:
+            case TAILOR:
+                updatedUserAuthorities.add("ROLE_USER");
+                break;
+        }
+        return updatedUserAuthorities;
+    }
+
+    //MTC - added method to get roles from usertype
+    public Set<Authority> getAuthoritiesFromUserType(UserType userType){
+        Set<Authority> updatedUserAuthorities = new HashSet<>();
+        switch(userType){
+            case ADMIN:
+                updatedUserAuthorities.add(authorityRepository.findOne("ROLE_ADMIN"));
+                updatedUserAuthorities.add(authorityRepository.findOne("ROLE_USER"));
+                break;
+            case MANAGER:
+                updatedUserAuthorities.add(authorityRepository.findOne("ROLE_MANAGER"));
+                updatedUserAuthorities.add(authorityRepository.findOne("ROLE_USER"));
+                break;
+            case SALES:
+            case SHIPPING:
+            case TAILOR:
+                updatedUserAuthorities.add(authorityRepository.findOne("ROLE_USER"));
+                break;
+        }
+        return updatedUserAuthorities;
+    }
+
 }

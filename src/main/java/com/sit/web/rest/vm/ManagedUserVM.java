@@ -211,11 +211,18 @@ public class ManagedUserVM extends UserDTO {
     public String toString() {
         return "ManagedUserVM{" +
             "id=" + id +
-            ", createdBy=" + createdBy +
+            ", createdBy='" + createdBy + '\'' +
             ", createdDate=" + createdDate +
             ", lastModifiedBy='" + lastModifiedBy + '\'' +
             ", lastModifiedDate=" + lastModifiedDate +
-            ", companyId = " + companyId +
-            "} " + super.toString();
+            ", password='" + password + '\'' +
+            ", sitid=" + sitid +
+            ", companyId=" + companyId +
+            ", userType=" + userType +
+            ", fitterIndicator=" + fitterIndicator +
+            ", managerApprovalCode=" + managerApprovalCode +
+            ", storeId=" + storeId +
+            ", workroomId=" + workroomId +
+            '}';
     }
 }

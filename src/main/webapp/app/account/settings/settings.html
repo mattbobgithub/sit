@@ -74,9 +74,17 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="field_storeId">Default Store</label>
-                    <select class="form-control" id="field_storeId" name="sizeType" ng-model="vm.settingsAccount.storeId"
-                            ng-options="store.id as store.description for store in vm.stores"            >
+                <label for="field_storeId">Default Store</label>
+                <select class="form-control" id="field_storeId" name="store" ng-model="vm.settingsAccount.storeId"
+                        ng-options="store.id as store.description for store in vm.stores"            >
+                    <option value=""></option>
+                </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="field_workroomId">Default Workroom</label>
+                    <select class="form-control" id="field_workroomId" name="workroom" ng-model="vm.settingsAccount.workroomId"
+                            ng-options="workroom.id as workroom.description for workroom in vm.workrooms"            >
                         <option value=""></option>
                     </select>
                 </div>
