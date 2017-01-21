@@ -119,12 +119,7 @@
         />
     </div>
 
-    <div class="form-group">
-        <label for="field_company">Company</label>
-        <select class="form-control" id="field_company" name="company" ng-model="vm.user.companyId" ng-options="company.id as company.description for company in vm.companies"            >
-            <option value=""></option>
-        </select>
-    </div>
+
     <div class="form-group">
         <label for="field_store">Store</label>
         <select class="form-control" id="field_store" name="store" ng-model="vm.user.storeId" ng-options="store.id as store.description for store in vm.stores"            >

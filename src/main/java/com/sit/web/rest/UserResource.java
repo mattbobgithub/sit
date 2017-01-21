@@ -95,7 +95,7 @@ public class UserResource {
     @Timed
     @Secured({AuthoritiesConstants.ADMIN, AuthoritiesConstants.MANAGER})
     public ResponseEntity<?> createUser(@RequestBody ManagedUserVM managedUserVM) throws URISyntaxException {
-        log.debug("REST request to save User : {}", managedUserVM);
+        log.debug("REST request to create User : {}", managedUserVM);
 
         //Lowercase the user login before comparing with database
         if (userRepository.findOneByLogin(managedUserVM.getLogin().toLowerCase()).isPresent()) {
@@ -116,10 +116,11 @@ public class UserResource {
             User newUser = userService.createUser(managedUserVM);
 
             //MTC update SitUser object
+            managedUserVM.setId(newUser.getId());
             SitUserDTO sitUserDTO = new SitUserDTO(managedUserVM);
             sitUserService.save(sitUserDTO);
 
-            mailService.sendCreationEmail(newUser);
+         //   mailService.sendCreationEmail(newUser);
             return ResponseEntity.created(new URI("/api/users/" + newUser.getLogin()))
                 .headers(HeaderUtil.createAlert( "A user is created with identifier " + newUser.getLogin(), newUser.getLogin()))
                 .body(newUser);

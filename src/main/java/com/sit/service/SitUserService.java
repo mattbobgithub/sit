@@ -40,7 +40,9 @@ public class SitUserService {
     public SitUserDTO save(SitUserDTO sitUserDTO) {
         log.debug("Request to save SitUser : {}", sitUserDTO);
         SitUser sitUser = sitUserMapper.sitUserDTOToSitUser(sitUserDTO);
+        log.debug("sitUser id before save:" + sitUser.getId());
         sitUser = sitUserRepository.save(sitUser);
+        log.debug("sitUser id after save:" + sitUser.getId());
         SitUserDTO result = sitUserMapper.sitUserToSitUserDTO(sitUser);
         return result;
     }

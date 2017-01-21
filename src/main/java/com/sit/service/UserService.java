@@ -86,7 +86,7 @@ public class UserService {
 
     public User createUser(String login, String password, String firstName, String lastName, String email,
         String langKey, Long sitid) {
-
+log.debug("userService - createUser method for user login: " + login + " with sitid: " + sitid);
         User newUser = new User();
         Authority authority = authorityRepository.findOne(AuthoritiesConstants.USER);
         Set<Authority> authorities = new HashSet<>();
@@ -112,7 +112,7 @@ public class UserService {
     }
 
     public User createUser(ManagedUserVM managedUserVM) {
-        log.debug("creating user - " + managedUserVM.getLogin());
+        log.debug("creating user - " + managedUserVM.getLogin() + " with sitid: " + managedUserVM.getSitid());
         User user = new User();
         user.setLogin(managedUserVM.getLogin());
         user.setFirstName(managedUserVM.getFirstName());

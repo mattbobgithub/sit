@@ -17,7 +17,6 @@
         vm.user = entity;
 
         //MTC added for SitUser props
-        vm.companies = Company.query();
         vm.stores = Store.query();
         vm.workrooms = Workroom.query();
         vm.users = User.query();
