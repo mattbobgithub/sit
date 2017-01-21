@@ -7,25 +7,35 @@
               <span class="glyphicon glyphicon-flash"></span> <span>Create a new User</span>
           </button>
       </div>
+
     </div>
     <div class="table-responsive">
         <table class="table table-striped">
             <thead>
             <!--<tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">  -->
-            <tr jh-sort="vm.predicate" ascending="vm.reverse">
+            <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
 
             <th jh-sort-by="id"><span>ID</span><span class="glyphicon glyphicon-sort"></span></th>
                 <th jh-sort-by="login"><span>Login</span> <span class="glyphicon glyphicon-sort"></span></th>
                 <th jh-sort-by="email"><span>Email</span> <span class="glyphicon glyphicon-sort"></span></th>
                 <th></th>
-                                <th><span>Profiles</span></th>                <th jh-sort-by="createdDate"><span>Created Date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                <th><span>Profiles</span></th>
+                <th jh-sort-by="createdDate"><span>Created Date</span> <span class="glyphicon glyphicon-sort"></span></th>
                 <th jh-sort-by="lastModifiedBy"><span>Last Modified By</span> <span class="glyphicon glyphicon-sort"></span></th>
                 <th jh-sort-by="lastModifiedDate"><span>Last Modified Date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                <th><span>User Type</span><select class="form-control" name="searchUserType" ng-model="search.userType" id="field_searchUserType">
+                        <option value="ADMIN">ADMIN</option>
+                        <option value="MANAGER">MANAGER</option>
+                        <option value="SALES">SALES</option>
+                        <option value="TAILOR">TAILOR</option>
+                        <option value="SHIPPING">SHIPPING</option>
+                    </select>
+                </th>
                 <th></th>
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="user in vm.users track by user.id">
+            <tr ng-repeat="user in vm.users | filter:search track by user.id">
                 <td><a ui-sref="user-management-detail({login:user.login})">{{user.id}}</a></td>
                 <td>{{user.login}}</td>
                 <td>{{user.email}}</td>
@@ -44,6 +54,7 @@
                 <td>{{user.createdDate | date:'dd/MM/yy HH:mm'}}</td>
                 <td>{{user.lastModifiedBy}}</td>
                 <td>{{user.lastModifiedDate | date:'dd/MM/yy HH:mm'}}</td>
+                <td>{{user.userType}}</td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"
