@@ -24,8 +24,6 @@
 
         console.log(vm);
 
-
-
         function clear () {
             $uibModalInstance.dismiss('cancel');
         }

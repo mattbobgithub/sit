@@ -3,6 +3,8 @@ package com.sit.repository.master;
 import com.sit.domain.User;
 
 import java.time.ZonedDateTime;
+
+import com.sit.web.rest.vm.ManagedUserVM;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -29,4 +31,5 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @Query(value = "select distinct user from User user left join fetch user.authorities",
         countQuery = "select count(user) from User user")
     Page<User> findAllWithAuthorities(Pageable pageable);
+
 }

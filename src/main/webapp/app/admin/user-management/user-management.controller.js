@@ -41,9 +41,9 @@
 
         function loadAll () {
             User.query({
-                page: pagingParams.page - 1,
-                size: vm.itemsPerPage,
-                sort: sort()
+             //   page: pagingParams.page - 1,
+             //   size: vm.itemsPerPage,
+             //   sort: sort()
             }, onSuccess, onError);
         }
 
@@ -56,14 +56,16 @@
                     hiddenUsersSize++;
                 }
             }
-            vm.links = ParseLinks.parse(headers('link'));
-            vm.totalItems = headers('X-Total-Count') - hiddenUsersSize;
-            vm.queryCount = vm.totalItems;
-            vm.page = pagingParams.page;
+           // vm.links = ParseLinks.parse(headers('link'));
+           // vm.totalItems = headers('X-Total-Count') - hiddenUsersSize;
+           // vm.queryCount = vm.totalItems;
+           // vm.page = pagingParams.page;
             vm.users = data;
+           // console.log(vm.users);
         }
 
         function onError(error) {
+            console.log("error with users rest request")
             AlertService.error(error.data.message);
         }
 

@@ -56,6 +56,17 @@ public class ManagedUserVM extends UserDTO {
         this.password = null;
     }
 
+    public ManagedUserVM(SitUserDTO sitUserDTO) {
+        //now update sitUser props
+        this.id = sitUserDTO.getId();
+        this.companyId = sitUserDTO.getCompanyId();
+        this.userType = sitUserDTO.getUserType();
+        this.fitterIndicator = sitUserDTO.getFitterIndicator();
+        this.managerApprovalCode = sitUserDTO.getManagerApprovalCode();
+        this.storeId = sitUserDTO.getStoreId();
+        this.workroomId = sitUserDTO.getWorkroomId();
+    }
+
     //MTC add new constructor with sitUser as added param
     public ManagedUserVM(User user, SitUserDTO sitUserDTO){
         super(user);
@@ -66,7 +77,6 @@ public class ManagedUserVM extends UserDTO {
         this.lastModifiedDate = user.getLastModifiedDate();
         this.password = null;
         this.sitid = user.getSitid();
-
 
         //now update sitUser props
         this.companyId = sitUserDTO.getCompanyId();

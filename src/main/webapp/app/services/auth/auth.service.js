@@ -132,7 +132,7 @@
             // MTC - blank navbar titles
             $rootScope.companyTitleName = null;
             $rootScope.storeTitleName = null;
-            $rootScope.workroomTitleName = "";
+            $rootScope.workroomTitleName = null;
         }
 
         function resetPasswordFinish (keyAndPassword, callback) {

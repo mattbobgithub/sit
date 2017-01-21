@@ -6,19 +6,19 @@ import com.sit.domain.SitUser;
 import com.sit.domain.User;
 import com.sit.repository.master.UserRepository;
 import com.sit.security.AuthoritiesConstants;
+import com.sit.security.SecurityUtils;
+import com.sit.service.CompanyService;
 import com.sit.service.MailService;
 import com.sit.service.SitUserService;
 import com.sit.service.UserService;
 import com.sit.service.dto.SitUserDTO;
+import com.sit.service.mapper.SitUserMapper;
 import com.sit.web.rest.util.HeaderUtil;
-import com.sit.web.rest.util.PaginationUtil;
 import com.sit.web.rest.vm.ManagedUserVM;
 import io.swagger.annotations.ApiParam;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
@@ -27,9 +27,9 @@ import org.springframework.web.bind.annotation.*;
 import javax.inject.Inject;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 /**
  * REST controller for managing users.
@@ -73,6 +73,12 @@ public class UserResource {
     @Inject
     private SitUserService sitUserService;
 
+    @Inject
+    private SitUserMapper sitUserMapper;
+
+    @Inject
+    private CompanyService companyService;
+
     /**
      * POST  /users  : Creates a new user.
      * <p>
@@ -87,7 +93,7 @@ public class UserResource {
      */
     @PostMapping("/users")
     @Timed
-    @Secured(AuthoritiesConstants.ADMIN)
+    @Secured({AuthoritiesConstants.ADMIN, AuthoritiesConstants.MANAGER})
     public ResponseEntity<?> createUser(@RequestBody ManagedUserVM managedUserVM) throws URISyntaxException {
         log.debug("REST request to save User : {}", managedUserVM);
 
@@ -101,6 +107,12 @@ public class UserResource {
                 .headers(HeaderUtil.createFailureAlert("userManagement", "emailexists", "Email already in use"))
                 .body(null);
         } else {
+
+            //MTC set default props for tenant
+            Long defaultCompanySitId = companyService.findAll().get(0).getId();
+            managedUserVM.setCompanyId(defaultCompanySitId);
+            managedUserVM.setSitid(defaultCompanySitId);
+
             User newUser = userService.createUser(managedUserVM);
 
             //MTC update SitUser object
@@ -124,7 +136,7 @@ public class UserResource {
      */
     @PutMapping("/users")
     @Timed
-    @Secured(AuthoritiesConstants.ADMIN)
+    @Secured({AuthoritiesConstants.ADMIN, AuthoritiesConstants.MANAGER})
     public ResponseEntity<ManagedUserVM> updateUser(@RequestBody ManagedUserVM managedUserVM) {
         log.debug("REST request to update User : {}", managedUserVM);
         Optional<User> existingUser = userRepository.findOneByEmail(managedUserVM.getEmail());
@@ -135,7 +147,11 @@ public class UserResource {
         if (existingUser.isPresent() && (!existingUser.get().getId().equals(managedUserVM.getId()))) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("userManagement", "userexists", "Login already in use")).body(null);
         }
-        //MTC update SitUser object first, then user in both tenant and master dbs
+        //MTC set default props for tenant - only one company allowed per database
+        Long defaultCompanySitId = companyService.findAll().get(0).getId();
+        managedUserVM.setCompanyId(defaultCompanySitId);
+        managedUserVM.setSitid(defaultCompanySitId);
+
         SitUserDTO sitUserDTO = new SitUserDTO(managedUserVM);
         sitUserDTO = sitUserService.save(sitUserDTO);
 
@@ -156,22 +172,47 @@ public class UserResource {
      * @return the ResponseEntity with status 200 (OK) and with body all users
      * @throws URISyntaxException if the pagination headers couldn't be generated
      */
+//    @GetMapping("/users")
+//    @Timed
+//    public ResponseEntity<List<ManagedUserVM>> getAllUsers(@ApiParam Pageable pageable)
+//        throws URISyntaxException {
+//
+//
+//        Page<User> page = userRepository.findAllWithAuthorities(pageable);
+//
+//        List<ManagedUserVM> managedUserVMs = page.getContent().stream()
+//            .map(ManagedUserVM::new)
+//            .collect(Collectors.toList());
+//
+//        //MTC crude way to update muvm with SitUser props
+//        for (ManagedUserVM muvm: managedUserVMs) {
+//            managedUserVMs.set(managedUserVMs.indexOf(muvm), this.updateManagedUserVMWithSitUser(muvm));
+//        }
+//
+//        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/users");
+//        return new ResponseEntity<>(managedUserVMs, headers, HttpStatus.OK);
+//    }
+
     @GetMapping("/users")
     @Timed
-    public ResponseEntity<List<ManagedUserVM>> getAllUsers(@ApiParam Pageable pageable)
+    public ResponseEntity<List<ManagedUserVM>> getAllUsers()
         throws URISyntaxException {
-        Page<User> page = userRepository.findAllWithAuthorities(pageable);
-        List<ManagedUserVM> managedUserVMs = page.getContent().stream()
-            .map(ManagedUserVM::new)
-            .collect(Collectors.toList());
+// get sitUsers first
+     //   Page<User> page = userRepository.findAllWithAuthorities(pageable);
+      SitUser sitUser = sitUserService.getByUsername(SecurityUtils.getCurrentUserLogin());
+        List<SitUserDTO> sitUserDTOs = sitUserService.findAllForSitUser(sitUser);
 
-        //MTC crude way to update muvm with SitUser props
-        for (ManagedUserVM muvm: managedUserVMs) {
-            managedUserVMs.set(managedUserVMs.indexOf(muvm), this.updateManagedUserVMWithSitUser(muvm));
+        List<ManagedUserVM> managedUserVMs = new ArrayList<>();
+
+        //MTC crude way to update muvm with User props
+        for (SitUserDTO sudto: sitUserDTOs) {
+          //  managedUserVMs.set(managedUserVMs.indexOf(muvm), this.updateManagedUserVMWithUser(muvm));
+            User user = userService.getUserWithAuthorities(sudto.getId());
+            managedUserVMs.add(new ManagedUserVM(user, sudto));
         }
 
-        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/users");
-        return new ResponseEntity<>(managedUserVMs, headers, HttpStatus.OK);
+     //   HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/users");
+        return new ResponseEntity<>(managedUserVMs, HttpStatus.OK);
     }
 
     /**
@@ -246,4 +287,5 @@ public class UserResource {
         }
         return muvm;
     }
+
 }

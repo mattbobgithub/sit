@@ -1,13 +1,13 @@
 package com.sit.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.sit.domain.SitUser;
+import com.sit.security.SecurityUtils;
 import com.sit.service.SitUserService;
-import com.sit.web.rest.util.HeaderUtil;
 import com.sit.service.dto.SitUserDTO;
-
+import com.sit.web.rest.util.HeaderUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,10 +15,9 @@ import org.springframework.web.bind.annotation.*;
 import javax.inject.Inject;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 /**
  * REST controller for managing SitUser.
@@ -28,7 +27,7 @@ import java.util.stream.Collectors;
 public class SitUserResource {
 
     private final Logger log = LoggerFactory.getLogger(SitUserResource.class);
-        
+
     @Inject
     private SitUserService sitUserService;
 
@@ -65,6 +64,11 @@ public class SitUserResource {
     @Timed
     public ResponseEntity<SitUserDTO> updateSitUser(@RequestBody SitUserDTO sitUserDTO) throws URISyntaxException {
         log.debug("REST request to update SitUser : {}", sitUserDTO);
+
+
+        //MTC - update user roles from usertype
+
+
         if (sitUserDTO.getId() == null) {
             return createSitUser(sitUserDTO);
         }
@@ -79,11 +83,23 @@ public class SitUserResource {
      *
      * @return the ResponseEntity with status 200 (OK) and the list of sitUsers in body
      */
+    // MTC - override to return only users that current logged in user can access,
     @GetMapping("/sit-users")
     @Timed
     public List<SitUserDTO> getAllSitUsers() {
         log.debug("REST request to get all SitUsers");
-        return sitUserService.findAll();
+        List<SitUserDTO> result = new ArrayList<>();
+       if (SecurityUtils.isCurrentUserInRole("ROLE_ADMIN")) {
+           result = sitUserService.findAll();
+       }
+           else {
+           if (SecurityUtils.isCurrentUserInRole("ROLE_MANAGER")) {
+               SitUser sitUser = sitUserService.getByUsername(SecurityUtils.getCurrentUserLogin());
+               result = sitUserService.findAllForSitUser(sitUser);
+
+           }
+       }
+          return result;
     }
 
     /**

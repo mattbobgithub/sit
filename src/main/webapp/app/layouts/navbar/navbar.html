@@ -35,6 +35,18 @@
                     </a>
 
                     <ul class="dropdown-menu" uib-dropdown-menu>
+                        <!--<li ui-sref-active="active">-->
+                            <!--<a ui-sref="sit-userANG_SIT" ng-click="vm.collapseNavbar()">-->
+                                <!--<span class="glyphicon glyphicon-asterisk"></span>&nbsp;-->
+                                <!--<span >My Users</span>-->
+                            <!--</a>-->
+                        <!--</li>-->
+                        <li ui-sref-active="active">
+                            <a ui-sref="user-management" ng-click="vm.collapseNavbar()">
+                                <span class="glyphicon glyphicon-user"></span>&nbsp;
+                                <span>My Users</span>
+                            </a>
+                        </li>
                         <li ui-sref-active="active">
                             <a ui-sref="workroom-metricANG_SIT" ng-click="vm.collapseNavbar()">
                                 <span class="glyphicon glyphicon-asterisk"></span>&nbsp;
@@ -42,11 +54,11 @@
                             </a>
                         </li>
                         <li ui-sref-active="active">
-                            <a ui-sref="workroomANG_SIT" ng-click="vm.collapseNavbar()">
-                                <span class="glyphicon glyphicon-asterisk"></span>&nbsp;
-                                <span >Workroom ANG SIT</span>
-                            </a>
-                        </li>
+                        <a ui-sref="workroomANG_SIT" ng-click="vm.collapseNavbar()">
+                            <span class="glyphicon glyphicon-asterisk"></span>&nbsp;
+                            <span >Workroom ANG SIT</span>
+                        </a>
+                    </li>
                         <li ui-sref-active="active">
                             <a ui-sref="ticketANG_SIT" ng-click="vm.collapseNavbar()">
                                 <span class="glyphicon glyphicon-asterisk"></span>&nbsp;

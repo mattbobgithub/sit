@@ -6,10 +6,12 @@ import com.sit.service.dto.SitUserDTO;
 import com.sit.service.mapper.SitUserMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
+import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -89,5 +91,38 @@ public class SitUserService {
         log.debug("Request to get SitUser : {}", username);
         SitUser sitUser = sitUserRepository.findByUsername(username);
         return sitUser;
+    }
+
+    public List<SitUserDTO> findByStoreId(Long storeId){
+        log.debug("sitUserService - findByStoreId: {}", storeId);
+
+        List<SitUserDTO> result = sitUserRepository.findByStoreId(storeId).stream()
+            .map(sitUserMapper::sitUserToSitUserDTO)
+            .collect(Collectors.toCollection(LinkedList::new));
+
+        return result;
+
+    }
+
+    public List<SitUserDTO> findByWorkroomId(Long workroomId){
+        log.debug("sitUserService - findByWorkroomId: {}", workroomId);
+
+        List<SitUserDTO> result = sitUserRepository.findByWorkroomId(workroomId).stream()
+            .map(sitUserMapper::sitUserToSitUserDTO)
+            .collect(Collectors.toCollection(LinkedList::new));
+
+        return result;
+
+    }
+
+    public List<SitUserDTO> findAllForSitUser(SitUser sitUser){
+        SitUserDTO sitUserDTO = sitUserMapper.sitUserToSitUserDTO(sitUser);
+        List<SitUserDTO> storeAndWorkroomUsers = this.findByStoreId(sitUserDTO.getStoreId());
+        storeAndWorkroomUsers.addAll(this.findByWorkroomId(sitUserDTO.getWorkroomId()));
+
+        List<SitUserDTO> depdupeSitUser =
+            new ArrayList<>(new LinkedHashSet<>(storeAndWorkroomUsers));
+
+        return depdupeSitUser;
     }
 }
