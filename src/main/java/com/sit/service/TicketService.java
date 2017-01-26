@@ -67,9 +67,16 @@ public class TicketService {
     @Transactional(readOnly = true)
     public TicketDTO findOne(Long id) {
         log.debug("Request to get Ticket : {}", id);
-        Ticket ticket = ticketRepository.findOne(id);
-        TicketDTO ticketDTO = ticketMapper.ticketToTicketDTO(ticket);
-        return ticketDTO;
+        if (id==0){
+            Ticket newTicket = new Ticket();
+            return ticketMapper.ticketToTicketDTO(newTicket);
+        }
+        else{
+            Ticket ticket = ticketRepository.findOne(id);
+            TicketDTO ticketDTO = ticketMapper.ticketToTicketDTO(ticket);
+            return ticketDTO;
+        }
+
     }
 
     /**

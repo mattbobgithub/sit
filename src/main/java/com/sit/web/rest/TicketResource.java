@@ -2,12 +2,10 @@ package com.sit.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.sit.service.TicketService;
-import com.sit.web.rest.util.HeaderUtil;
 import com.sit.service.dto.TicketDTO;
-
+import com.sit.web.rest.util.HeaderUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,10 +13,8 @@ import org.springframework.web.bind.annotation.*;
 import javax.inject.Inject;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 /**
  * REST controller for managing Ticket.
@@ -28,7 +24,7 @@ import java.util.stream.Collectors;
 public class TicketResource {
 
     private final Logger log = LoggerFactory.getLogger(TicketResource.class);
-        
+
     @Inject
     private TicketService ticketService;
 
@@ -45,6 +41,9 @@ public class TicketResource {
         log.debug("REST request to save Ticket : {}", ticketDTO);
         if (ticketDTO.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("ticket", "idexists", "A new ticket cannot already have an ID")).body(null);
+        }
+        if (ticketDTO.getDropDate() == null) {
+            return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("ticket", "idexists", "Null Drop Date not allowed")).body(null);
         }
         TicketDTO result = ticketService.save(ticketDTO);
         return ResponseEntity.created(new URI("/api/tickets/" + result.getId()))
@@ -95,8 +94,11 @@ public class TicketResource {
     @GetMapping("/tickets/{id}")
     @Timed
     public ResponseEntity<TicketDTO> getTicket(@PathVariable Long id) {
+
         log.debug("REST request to get Ticket : {}", id);
+
         TicketDTO ticketDTO = ticketService.findOne(id);
+
         return Optional.ofNullable(ticketDTO)
             .map(result -> new ResponseEntity<>(
                 result,
