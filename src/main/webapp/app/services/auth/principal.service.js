@@ -5,9 +5,9 @@
         .module('sitApp')
         .factory('Principal', Principal);
 
-    Principal.$inject = ['$q', 'Account'];
+    Principal.$inject = ['$q', 'Account', 'User', '$rootScope'];
 
-    function Principal ($q, Account) {
+    function Principal ($q, Account, User, $rootScope) {
         var _identity,
             _authenticated = false;
 
@@ -65,6 +65,15 @@
             if (angular.isDefined(_identity)) {
                 deferred.resolve(_identity);
 
+                //move this to somewhere after the promise fulfilled if possible.
+                if (typeof $rootScope.companyTitleName === "undefined"
+                    || $rootScope.companyTitleName === "undefined") {
+                    User.getSitUserDetails({username: _identity.login}, function (result) {
+                        $rootScope.companyTitleName = result.company.description;
+                        $rootScope.storeTitleName = result.store.description;
+                        $rootScope.workroomTitleName = result.workroom.description;
+                    });
+                }
                 return deferred.promise;
             }
 
@@ -78,6 +87,14 @@
             function getAccountThen (account) {
                 _identity = account.data;
                 _authenticated = true;
+
+                //user successfully logged in, now update navbar with company/store/workroom
+                User.getSitUserDetails({username:_identity.login}, function(result){
+                    $rootScope.companyTitleName = result.company.description;
+                    $rootScope.storeTitleName = result.store.description;
+                    $rootScope.workroomTitleName = result.workroom.description;
+                });
+
                 deferred.resolve(_identity);
             }
 
