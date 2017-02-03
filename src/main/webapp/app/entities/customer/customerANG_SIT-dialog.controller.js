@@ -5,14 +5,17 @@
         .module('sitApp')
         .controller('CustomerAngSitDialogController', CustomerAngSitDialogController);
 
-    CustomerAngSitDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'Customer'];
+    CustomerAngSitDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'Customer', 'CustomerAddress'];
 
-    function CustomerAngSitDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, Customer) {
+    function CustomerAngSitDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, Customer, CustomerAddress) {
         var vm = this;
 
         vm.customer = entity;
+        console.log(vm.customer);
+
         vm.clear = clear;
         vm.save = save;
+      //  vm.customeraddresses = CustomerAddress.query();
 
         $timeout(function (){
             angular.element('.form-group:eq(1)>input').focus();

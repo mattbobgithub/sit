@@ -27,9 +27,25 @@
             <column name="customer_code" type="varchar(255)">
                 <constraints nullable="false" />
             </column>
-            
+
+            <column name="email" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="created_by" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_date" type="timestamp" defaultValueDate="${now}">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_modified_by" type="varchar(50)"/>
+            <column name="last_modified_date" type="timestamp"/>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
-        
+        <loadData encoding="UTF-8"
+                  file="config/liquibase/customers.csv"
+                  separator=";"
+                  tableName="customer">
+        </loadData>
     </changeSet>
 </databaseChangeLog>

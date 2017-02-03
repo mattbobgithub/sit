@@ -1,6 +1,6 @@
 package com.sit.service.dto;
 
-import javax.validation.constraints.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -8,12 +8,14 @@ import java.util.Objects;
 /**
  * A DTO for the Customer entity.
  */
-public class CustomerDTO implements Serializable {
+public class CustomerDTO extends AbstractAuditingDTO implements Serializable {
 
     private Long id;
 
     @NotNull
     private String customerCode;
+
+    private String email;
 
 
     public Long getId() {
@@ -29,6 +31,13 @@ public class CustomerDTO implements Serializable {
 
     public void setCustomerCode(String customerCode) {
         this.customerCode = customerCode;
+    }
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     @Override
@@ -57,6 +66,7 @@ public class CustomerDTO implements Serializable {
         return "CustomerDTO{" +
             "id=" + id +
             ", customerCode='" + customerCode + "'" +
+            ", email='" + email + "'" +
             '}';
     }
 }

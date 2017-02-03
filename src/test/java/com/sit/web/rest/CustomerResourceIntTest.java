@@ -1,13 +1,11 @@
 package com.sit.web.rest;
 
 import com.sit.SitApp;
-
 import com.sit.domain.Customer;
 import com.sit.repository.tenant.CustomerRepository;
 import com.sit.service.CustomerService;
 import com.sit.service.dto.CustomerDTO;
 import com.sit.service.mapper.CustomerMapper;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -42,6 +40,9 @@ public class CustomerResourceIntTest {
 
     private static final String DEFAULT_CUSTOMER_CODE = "AAAAAAAAAA";
     private static final String UPDATED_CUSTOMER_CODE = "BBBBBBBBBB";
+
+    private static final String DEFAULT_EMAIL = "AAAAAAAAAA";
+    private static final String UPDATED_EMAIL = "BBBBBBBBBB";
 
     @Inject
     private CustomerRepository customerRepository;
@@ -83,7 +84,8 @@ public class CustomerResourceIntTest {
      */
     public static Customer createEntity(EntityManager em) {
         Customer customer = new Customer()
-                .customerCode(DEFAULT_CUSTOMER_CODE);
+                .customerCode(DEFAULT_CUSTOMER_CODE)
+                .email(DEFAULT_EMAIL);
         return customer;
     }
 
@@ -110,6 +112,7 @@ public class CustomerResourceIntTest {
         assertThat(customerList).hasSize(databaseSizeBeforeCreate + 1);
         Customer testCustomer = customerList.get(customerList.size() - 1);
         assertThat(testCustomer.getCustomerCode()).isEqualTo(DEFAULT_CUSTOMER_CODE);
+        assertThat(testCustomer.getEmail()).isEqualTo(DEFAULT_EMAIL);
     }
 
     @Test
@@ -163,7 +166,8 @@ public class CustomerResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(customer.getId().intValue())))
-            .andExpect(jsonPath("$.[*].customerCode").value(hasItem(DEFAULT_CUSTOMER_CODE.toString())));
+            .andExpect(jsonPath("$.[*].customerCode").value(hasItem(DEFAULT_CUSTOMER_CODE.toString())))
+            .andExpect(jsonPath("$.[*].email").value(hasItem(DEFAULT_EMAIL.toString())));
     }
 
     @Test
@@ -177,7 +181,8 @@ public class CustomerResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(customer.getId().intValue()))
-            .andExpect(jsonPath("$.customerCode").value(DEFAULT_CUSTOMER_CODE.toString()));
+            .andExpect(jsonPath("$.customerCode").value(DEFAULT_CUSTOMER_CODE.toString()))
+            .andExpect(jsonPath("$.email").value(DEFAULT_EMAIL.toString()));
     }
 
     @Test
@@ -198,7 +203,8 @@ public class CustomerResourceIntTest {
         // Update the customer
         Customer updatedCustomer = customerRepository.findOne(customer.getId());
         updatedCustomer
-                .customerCode(UPDATED_CUSTOMER_CODE);
+                .customerCode(UPDATED_CUSTOMER_CODE)
+                .email(UPDATED_EMAIL);
         CustomerDTO customerDTO = customerMapper.customerToCustomerDTO(updatedCustomer);
 
         restCustomerMockMvc.perform(put("/api/customers")
@@ -211,6 +217,7 @@ public class CustomerResourceIntTest {
         assertThat(customerList).hasSize(databaseSizeBeforeUpdate);
         Customer testCustomer = customerList.get(customerList.size() - 1);
         assertThat(testCustomer.getCustomerCode()).isEqualTo(UPDATED_CUSTOMER_CODE);
+        assertThat(testCustomer.getEmail()).isEqualTo(UPDATED_EMAIL);
     }
 
     @Test

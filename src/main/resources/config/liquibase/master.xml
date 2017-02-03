@@ -27,6 +27,7 @@
     <include file="classpath:config/liquibase/changelog/20170102162240_added_entity_Transfer.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20170102162241_added_entity_SitUser.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20170102162311_added_entity_EntityAuditEvent.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20170202213322_added_entity_CustomerAddress.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <include file="classpath:config/liquibase/changelog/20170102162223_added_entity_constraints_Garment.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20170102162224_added_entity_constraints_GarmentSize.xml" relativeToChangelogFile="false"/>
@@ -42,5 +43,6 @@
     <include file="classpath:config/liquibase/changelog/20170102162239_added_entity_constraints_TicketAction.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20170102162241_added_entity_constraints_SitUser.xml" relativeToChangelogFile="false"/>
 
+    <include file="classpath:config/liquibase/changelog/20170202213322_added_entity_constraints_CustomerAddress.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
 </databaseChangeLog>

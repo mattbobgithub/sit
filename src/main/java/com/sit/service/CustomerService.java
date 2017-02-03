@@ -6,8 +6,8 @@ import com.sit.service.dto.CustomerDTO;
 import com.sit.service.mapper.CustomerMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
 import java.util.LinkedList;
@@ -69,7 +69,16 @@ public class CustomerService {
         log.debug("Request to get Customer : {}", id);
         Customer customer = customerRepository.findOne(id);
         CustomerDTO customerDTO = customerMapper.customerToCustomerDTO(customer);
+
         return customerDTO;
+    }
+
+    @Transactional(readOnly = true)
+    public Customer findOneDomain(Long id) {
+        log.debug("Request to get Customer Domain Obj : {}", id);
+        Customer customer = customerRepository.findOne(id);
+
+        return customer;
     }
 
     /**

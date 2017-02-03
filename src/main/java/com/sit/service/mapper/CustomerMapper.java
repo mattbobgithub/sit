@@ -1,6 +1,6 @@
 package com.sit.service.mapper;
 
-import com.sit.domain.Customer;
+import com.sit.domain.*;
 import com.sit.service.dto.CustomerDTO;
 
 import org.mapstruct.*;
@@ -16,6 +16,7 @@ public interface CustomerMapper {
 
     List<CustomerDTO> customersToCustomerDTOs(List<Customer> customers);
 
+    @Mapping(target = "customerAddresses", ignore = true)
     Customer customerDTOToCustomer(CustomerDTO customerDTO);
 
     List<Customer> customerDTOsToCustomers(List<CustomerDTO> customerDTOs);

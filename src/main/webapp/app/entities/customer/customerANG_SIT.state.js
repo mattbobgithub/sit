@@ -13,7 +13,7 @@
             parent: 'entity',
             url: '/customerANG_SIT',
             data: {
-                authorities: ['ROLE_ADMIN', 'ROLE_MANAGER', 'ROLE_USER'],
+                authorities: ['ROLE_USER', 'ROLE_MANAGER', 'ROLE_ADMIN'],
                 pageTitle: 'Customers'
             },
             views: {
@@ -30,7 +30,7 @@
             parent: 'entity',
             url: '/customerANG_SIT/{id}',
             data: {
-                authorities: ['ROLE_USER'],
+                authorities: ['ROLE_USER', 'ROLE_MANAGER', 'ROLE_ADMIN'],
                 pageTitle: 'Customer'
             },
             views: {
@@ -58,7 +58,7 @@
             parent: 'customerANG_SIT-detail',
             url: '/detail/edit',
             data: {
-                authorities: ['ROLE_USER']
+                authorities: ['ROLE_USER', 'ROLE_MANAGER', 'ROLE_ADMIN']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
@@ -83,7 +83,7 @@
             parent: 'customerANG_SIT',
             url: '/new',
             data: {
-                authorities: ['ROLE_USER']
+                authorities: ['ROLE_USER', 'ROLE_MANAGER', 'ROLE_ADMIN']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
@@ -96,6 +96,7 @@
                         entity: function () {
                             return {
                                 customerCode: null,
+                                email: null,
                                 id: null
                             };
                         }
@@ -111,7 +112,7 @@
             parent: 'customerANG_SIT',
             url: '/{id}/edit',
             data: {
-                authorities: ['ROLE_USER']
+                authorities: ['ROLE_USER', 'ROLE_MANAGER', 'ROLE_ADMIN']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
@@ -136,7 +137,7 @@
             parent: 'customerANG_SIT',
             url: '/{id}/delete',
             data: {
-                authorities: ['ROLE_USER']
+                authorities: ['ROLE_USER', 'ROLE_MANAGER', 'ROLE_ADMIN']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({

@@ -94,5 +94,9 @@
 
     <cache alias="com.sit.domain.SitUser" uses-template="simple"/>
 
+    <cache alias="com.sit.domain.Customer.customerAddresses" uses-template="simple"/>
+
+    <cache alias="com.sit.domain.CustomerAddress" uses-template="simple"/>
+
     <!-- jhipster-needle-ehcache-add-entry -->
 </config>

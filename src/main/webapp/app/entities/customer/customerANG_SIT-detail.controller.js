@@ -5,9 +5,9 @@
         .module('sitApp')
         .controller('CustomerAngSitDetailController', CustomerAngSitDetailController);
 
-    CustomerAngSitDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'entity', 'Customer'];
+    CustomerAngSitDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'entity', 'Customer', 'CustomerAddress'];
 
-    function CustomerAngSitDetailController($scope, $rootScope, $stateParams, previousState, entity, Customer) {
+    function CustomerAngSitDetailController($scope, $rootScope, $stateParams, previousState, entity, Customer, CustomerAddress) {
         var vm = this;
 
         vm.customer = entity;
