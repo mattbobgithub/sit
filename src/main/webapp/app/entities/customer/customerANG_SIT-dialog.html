@@ -32,6 +32,59 @@
                      />
         </div>
 
+        <div class="table-responsive">
+            <table class="jh-table table table-striped">
+                <thead>
+                <tr>
+                    <th><span>ID</span></th>
+                    <th><span>Street Address 1</span></th>
+                    <th><span>Street Address 2</span></th>
+                    <th><span>City</span></th>
+                    <th><span>State</span></th>
+                    <th><span>Postal</span></th>
+                    <th><span>Country</span></th>
+                    <!--<th><span>Customer</span></th>-->
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="customerAddress in vm.customer.customerAddresses track by customerAddress.id">
+                    <td><a ui-sref="customer-address-detail({id:customerAddress.id})">{{customerAddress.id}}</a></td>
+                    <td>{{customerAddress.streetAddress1}}</td>
+                    <td>{{customerAddress.streetAddress2}}</td>
+                    <td>{{customerAddress.city}}</td>
+                    <td>{{customerAddress.state}}</td>
+                    <td>{{customerAddress.postal}}</td>
+                    <td>{{customerAddress.country}}</td>
+                    <!--<td>-->
+                        <!--<a ui-sref="customer-detail({id:customerAddress.customer.id})">{{customerAddress.customer.id}}</a>-->
+                    <!--</td>-->
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="customer-address.edit({id:customerAddress.id,customerid:vm.customer.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-xs hidden-sm"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="customer-address.delete({id:customerAddress.id})"
+                                    class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-xs hidden-sm"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+
+
+
+
+
+
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
